@@ -1,9 +1,12 @@
+'''
+############################################################################################################################
+Risk Assessment for Generic Cyber-Physical Systems (CPS) using Bayesian Belief Networks (BBN) based on AutomationML Models
+(Based on code by Pushparaj BHOSALE: https://github.com/Pbhosale1991/AML-BBN-RA)
+Author: Huang Shaofei
+Last update: 2025-01-18                                                         
+Latest version at https://github.com/shaofeihuang/CPS-Risk_Assessment-BBN
 ###################################################################################
-# Original code by Pushparaj BHOSALE: https://github.com/Pbhosale1991/AML-BBN-RA  #
-# Customised for Generic Cyber-Physical System (CPS) by Shaofei HUANG             #
-# Last update: 2025-01-18                                                         #
-###################################################################################
-
+'''
 import numpy as np
 import xml.etree.ElementTree as ET
 import networkx as nx
@@ -338,12 +341,12 @@ def generate_cpd_values_occur(num_states, num_parents, hazard_node=False, vulner
         probability_of_exposure_for_node = matching_vulnerability_nodes[0]['Probability of Exposure']
         pofe = float(probability_of_exposure_for_node)        
         if num_parents == 0:
-            cpd_values[0, 0] = pofe*sap
-            cpd_values[1, 0] = 1 - pofe*sap
+            cpd_values[0, 0] = pofe * sap
+            cpd_values[1, 0] = 1 - pofe * sap
         elif num_parents >= 1:
-            cpd_values[0, :-1] = pofe*sap  	# parent vulnerability is exposed
-            cpd_values[1, :-1] = 1-pofe*sap # parent vulnerability is unexposed
-            cpd_values[0, -1] = 0	        # parent vulnerability is exposed
+            cpd_values[0, :-1] = pofe * sap  	# parent vulnerability is exposed
+            cpd_values[1, :-1] = 1 - pofe * sap # parent vulnerability is unexposed
+            cpd_values[0, -1] = 0	            # parent vulnerability is exposed
             cpd_values[1, -1] = 1
             cpd_values[0, 0] = 1
             cpd_values[1, 0] = 0
@@ -400,17 +403,18 @@ def generate_cpd_values_impact_(num_states, num_parents, hazard_node=False, vuln
             cpd_values=generate_cpd_values_impact(num_parents)
     
     elif vulnerability_node:
-        probability_of_exposure_for_node = matching_vulnerability_nodes[0]['Probability of Impact']
-        pofe = float(probability_of_exposure_for_node)
+        probability_of_impact_for_node = matching_vulnerability_nodes[0]['Probability of Impact']
+        pofi = float(probability_of_impact_for_node)
         
         if num_parents == 0:
-            cpd_values[0, 0] = pofe*sap
-            cpd_values[1, 0] = 1 - pofe*sap
+            cpd_values[0, 0] = pofi * sap
+            cpd_values[1, 0] = 1 - pofi * sap
         elif num_parents >= 1:
-            cpd_values[0, :-1] = 1  	# parent Vulnerability is exposed
-            cpd_values[1, :-1] = 0 # parent vulnerability is unexposed
-            cpd_values[0, -1] = pofe*sap	# parent vulnerability is exposed
-            cpd_values[1, -1] = 1 - pofe*sap	# parent vulnerability is unexposed
+            cpd_values[0, :-1] = 1  	        # parent vulnerability is exposed
+            cpd_values[1, :-1] = 0              # parent vulnerability is unexposed
+            cpd_values[0, -1] = pofi * sap	    # parent vulnerability is exposed
+            cpd_values[1, -1] = 1 - pofi * sap	# parent vulnerability is unexposed
+    
     elif process_node:
         ref_base_for_node = matching_process_nodes[0]['RefBaseSystemUnitPath']
         
@@ -481,7 +485,7 @@ sap_input = input("Enter probability of successful security attack (SA) (0.01% <
 if not sap_input:
     sap_percent = 1  # Default value if no input
 else:
-    sap_percent = sap_input
+    sap_percent = float(sap_input)
 
 if 0.01 <= sap_percent <= 10:
     sap = sap_percent / 100
@@ -626,29 +630,29 @@ while True:
         source_node = source_node_input.upper()  # Convert to uppercase for consistency
         break
     else:
-        print("Invalid input. Please enter a valid node (V1-V6).")
+        print("[!] Invalid input. Please enter a valid node (V1-V6).")
 
 target_node = "CPS_Termination"
 
 try:
     shortest_path = nx.shortest_path(graph, source=source_node, target=target_node)
-    print(f"The shortest path from {source_node} to {target_node} is: {shortest_path}")
+    print(f"[*]] Shortest path from {source_node} to {target_node} is: {shortest_path}")
 except nx.NetworkXNoPath:
-    print(f"No path exists between {source_node} and {target_node}.")
+    print(f"[!] No path exists between {source_node} and {target_node}.")
 except nx.NodeNotFound as e:
-    print(f"Error: {e}")
+    print(f"[!] Error: {e}")
 
 print('[*] Shortest path in BBN (Severity/Impact)')
 graph = nx.DiGraph(bbn_impact.edges)
 try:
     shortest_path = nx.shortest_path(graph, source=source_node, target=target_node)
-    print(f"The shortest path from {source_node} to {target_node} is: {shortest_path}")
+    print(f"[*] Shortest path from {source_node} to {target_node} is: {shortest_path}")
 except nx.NetworkXNoPath:
-    print(f"No path exists between {source_node} and {target_node}.")
+    print(f"[!] No path exists between {source_node} and {target_node}.")
 except nx.NodeNotFound as e:
-    print(f"Error: {e}")
+    print(f"[!] Error: {e}")
 
-# Compute risk
+# Compute risk score
 risk_measurements = []
 for node in total_elements:
     prob_node = inference.query(variables=[node])
@@ -711,20 +715,16 @@ for nodes in total_elements:
         print("\n")
         print("[*] CPT (Occurence) of CPS System Termination:\n", prob_termination)
         impact_termination=inference2.query(variables=[nodes])
-        print("[*] CPT (Severity/Impact) of CPS System Termination:\n", impact_termination)
-#        prob_of_process_safety=inference.query(variables=[nodes], evidence={'V1':1, 'V2':1, 'V3':1, 'V4':1, 'V5':1})
-#        print("CPT of Process Safety:\n", prob_of_process_safety)
-        
+        print("[*] CPT (Severity/Impact) of CPS System Termination:\n", impact_termination)        
         cpd_prob = prob_termination.values
         cpd_impact = impact_termination.values
         print('--------------------------------------------------------')
         print("[*] Probability of CPS Termination:", cpd_prob[0])
         print("[*] Probability of Severity/Impact:", cpd_impact[0])
         risk_prob = cpd_prob[0]*cpd_impact[0]
-        #risk_prob = 1-risk_free_prob
         #print("Raw Risk Value:", risk_prob)
         normal_risk = (risk_prob)/(0.0674)
-        print('[*] Current normalised risk value: {:.2f} %'.format(normal_risk * 100))
+        print('[*] Current normalised risk score: {:.2f} %'.format(normal_risk * 100))
         print('--------------------------------------------------------')
         if normal_risk<0.2:
             print('[----] CPS System is under NEGLIGIBLE risk (less than 20%)')
