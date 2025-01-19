@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network1" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="SA">
+			<state id="State0" />
+			<state id="State1" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="V2">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>SA</parents>
+			<probabilities>0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="V6">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>SA V2</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="V1">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>SA V2 V6</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="V3">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>SA V2 V6</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="V4">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>SA V2 V6</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="V5">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>SA V2 V6</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="User">
+			<state id="State0" />
+			<state id="State1" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="CS">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>User V1 V2 V3 V4 V5 V6</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="NW">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>CS</parents>
+			<probabilities>0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="PS">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>NW User V2</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="SS">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>PS NW V1 V2</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Haz05">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>User</parents>
+			<probabilities>0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Haz01">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>User SS NW Haz05</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="AC">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>NW PS V2</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Haz06">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>SS AC NW PS Haz01 Haz05</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Haz03">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>SS AC NW Haz06 Haz05 PS Haz01</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Haz02">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>AC Haz05 Haz03 PS Haz01</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Haz04">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>AC Haz05 PS</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="CMP">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>Haz01 Haz05</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="DGD">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>Haz02 CMP Haz03 Haz04 Haz05 Haz06</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="TMN">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>Haz05 DGD CMP</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 5.0.4830.0 ACADEMIC" name="Network1">
+			<node id="SA">
+				<name>SA</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>460 40 527 78</position>
+			</node>
+			<node id="V1">
+				<name>V1</name>
+				<interior color="ff0000" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>360 80 417 111</position>
+			</node>
+			<node id="V2">
+				<name>V2</name>
+				<interior color="ff0000" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>380 140 437 171</position>
+			</node>
+			<node id="V3">
+				<name>V3</name>
+				<interior color="ff0000" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>460 100 517 131</position>
+			</node>
+			<node id="V4">
+				<name>V4</name>
+				<interior color="ff0000" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>600 180 657 211</position>
+			</node>
+			<node id="V5">
+				<name>V5</name>
+				<interior color="ff0000" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>540 140 597 171</position>
+			</node>
+			<node id="V6">
+				<name>V6</name>
+				<interior color="ff0000" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>600 80 657 111</position>
+			</node>
+			<node id="Haz01">
+				<name>Haz01</name>
+				<interior color="993300" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>320 260 377 291</position>
+			</node>
+			<node id="Haz02">
+				<name>Haz02</name>
+				<interior color="993300" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>340 340 397 371</position>
+			</node>
+			<node id="Haz03">
+				<name>Haz03</name>
+				<interior color="993300" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>420 340 477 371</position>
+			</node>
+			<node id="Haz04">
+				<name>Haz04</name>
+				<interior color="993300" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>600 300 657 331</position>
+			</node>
+			<node id="Haz05">
+				<name>Haz05</name>
+				<interior color="993300" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>540 380 597 411</position>
+			</node>
+			<node id="Haz06">
+				<name>Haz06</name>
+				<interior color="993300" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>620 380 677 411</position>
+			</node>
+			<node id="User">
+				<name>User</name>
+				<interior color="ffff00" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" bold="true" />
+				<position>360 200 417 231</position>
+			</node>
+			<node id="CS">
+				<name>CS</name>
+				<interior color="333399" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>480 200 537 236</position>
+			</node>
+			<node id="PS">
+				<name>PS</name>
+				<interior color="800080" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>520 320 577 351</position>
+			</node>
+			<node id="AC">
+				<name>AC</name>
+				<interior color="008000" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>420 260 477 291</position>
+			</node>
+			<node id="SS">
+				<name>SS</name>
+				<interior color="808000" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>620 260 677 291</position>
+			</node>
+			<node id="NW">
+				<name>NW</name>
+				<interior color="808080" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>520 260 577 291</position>
+			</node>
+			<node id="DGD">
+				<name>DGD</name>
+				<interior color="ff6600" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>460 400 517 431</position>
+			</node>
+			<node id="TMN">
+				<name>TMN</name>
+				<interior color="000000" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>460 460 517 491</position>
+			</node>
+			<node id="CMP">
+				<name>CMP</name>
+				<interior color="ff9900" />
+				<outline color="000080" />
+				<font color="ffffff" name="Arial" size="8" bold="true" />
+				<position>300 380 357 411</position>
+			</node>
+		</genie>
+	</extensions>
+</smile>
