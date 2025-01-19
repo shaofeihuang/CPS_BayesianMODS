@@ -1,6 +1,6 @@
 # Bayesian Belief Network (BBN) for Generic Cyber-Physical Systems (CPS)
 
-This repository contains code and resources for constructing and analysing Bayesian Belief Networks (BBNs), that consider probabilities of both cybersecurity vulnerabilities and physical hazards.
+This repository contains code and resources for constructing and analysing Bayesian Belief Networks (BBNs), that consider probabilities of both cybersecurity vulnerabilities and physical hazards. This work was inspired by Bhosale et al. (2024)'s paper which can be found here: https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10623880
 
 ## 1. Generic_CPS.aml
 This is a markup file depicting a generic CPS based on the Automation Markup Language (AutomationML). The More information can be found here: https://www.automationml.org/
