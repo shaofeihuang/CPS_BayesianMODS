@@ -9,5 +9,4 @@ This is a markup file depicting a generic CPS based on the Automation Markup Lan
 This is a representation of a generic CPS, edited using GeNIe Academic 5.0.
 
 ## 3. AML_BBN_CPS.py
-This code was tested on Python 3.12.8. It analyses an AutomationML file to generate BBNs and compute probabilities of occurence (of CPS system termination) and of severity/impact. The code is adapted from the integrated safety and security risk assessment code developed by Bhosale, which can be referenced here: https://github.com/Pbhosale1991/AML-BBN-RA Changes were been made to the original code to improve clarity and correct bugs, as well as to include new functions to identify shortest paths.
-
+This code was tested on Python 3.12.8. It analyses an AutomationML file to generate BBNs and compute probabilities of occurence (of CPS system termination) and of severity/impact. The code is adapted from the integrated safety and security risk assessment code developed by Bhosale, which can be referenced here: https://github.com/Pbhosale1991/AML-BBN-RA Changes were been made to the original code to improve its flow and clarity, user interface, and to fix bugs in the original code. A new function to identify shortest paths in the BBNs was also added.
