@@ -1,10 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CAEXFile SchemaVersion="3.0" FileName="Generic_CPS.aml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dke.de/CAEX" xsi:schemaLocation="http://www.dke.de/CAEX CAEX_ClassModel_V.3.0.xsd">
+<CAEXFile SchemaVersion="3.0" FileName="Generic_CPS_Mitigation.aml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dke.de/CAEX" xsi:schemaLocation="http://www.dke.de/CAEX CAEX_ClassModel_V.3.0.xsd">
   <SuperiorStandardVersion>AutomationML 2.10</SuperiorStandardVersion>
-  <SourceDocumentInformation OriginName="Pushparaj Bhosale" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginVersion="6.2.7.0" LastWritingDateTime="2025-01-19T08:36:12.7005602+08:00" OriginProjectID="DataSource" OriginProjectTitle="AML based data source for integrated risk assessment" OriginRelease="6.2.7.0" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" />
+  <SourceDocumentInformation OriginName="Pushparaj Bhosale" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginVersion="6.2.7.0" LastWritingDateTime="2025-01-20T12:55:08.2865175+08:00" OriginProjectID="DataSource" OriginProjectTitle="AML based data source for integrated risk assessment" OriginRelease="6.2.7.0" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" />
   <InstanceHierarchy Name="Generic CPS">
     <Version>0</Version>
     <InternalElement Name="Cyber System" ID="CyberSystem" RefBaseSystemUnitPath="AssetOfICS/Hardware/Process device/Workstation">
+      <Attribute Name="AutomationEquipments" AttributeDataType="xs:string" RefAttributeType="AttributeTypeLib/AutomationEquipments">
+        <Attribute Name="Vendor" AttributeDataType="xs:string" />
+        <Attribute Name="Part" AttributeDataType="xs:string" />
+        <Attribute Name="Product" AttributeDataType="xs:string" />
+        <Attribute Name="Version" AttributeDataType="xs:string" />
+        <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
+          <Revision>
+            <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
+            <AuthorName></AuthorName>
+          </Revision>
+          <Value>1.48254E-05</Value>
+        </Attribute>
+        <Attribute Name="Date of first use" AttributeDataType="xs:string" />
+      </Attribute>
       <ExternalInterface Name="IOfromWS" ID="78e1f2c8-41fe-4f8b-81b6-245692677754" RefBaseClassPath="ConnectionBetnAssets/Network based" />
       <ExternalInterface Name="IOfromUser" ID="6b22e07b-053c-44e2-8aed-7e76cb2ad5cb" RefBaseClassPath="ConnectionBetnAssets/User based" />
       <ExternalInterface Name="toHazard" ID="43422fd2-2a29-4185-a83e-acfde36f1cad" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
@@ -72,7 +86,7 @@
             <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
             <AuthorName></AuthorName>
           </Revision>
-          <Value>0.000001</Value>
+          <Value>0.00000016</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:date">
           <Value>2023-04-01</Value>
@@ -100,6 +114,7 @@
             <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
             <AuthorName></AuthorName>
           </Revision>
+          <Value>1.76E-06</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string">
           <Value>04/01/2023</Value>
@@ -128,6 +143,7 @@
             <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
             <AuthorName></AuthorName>
           </Revision>
+          <Value>0.0000004566</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:date">
           <Value>2023-04-01</Value>
@@ -246,7 +262,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.56</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.111265</Value>
         </Attribute>
@@ -281,9 +299,7 @@
           <Value>0.47287625</Value>
         </Attribute>
       </Attribute>
-      <ExternalInterface Name="ToV3" ID="25df5476-2cfc-42d0-b30f-68c60c5d9ed8" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef">
-        <ExternalInterface Name="ToV2" ID="7a9ab941-b206-41c2-8c11-17fa3bca4f34" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      </ExternalInterface>
+      <ExternalInterface Name="ToV3" ID="25df5476-2cfc-42d0-b30f-68c60c5d9ed8" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
       <InternalLink RefPartnerSideA="25df5476-2cfc-42d0-b30f-68c60c5d9ed8" RefPartnerSideB="de6258a7-8d39-4711-8414-f866f4999249" Name="InternalLink" />
     </InternalElement>
     <InternalElement Name="Information Disclosure" ID="V4" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
