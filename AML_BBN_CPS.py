@@ -16,11 +16,11 @@ import openpyxl
 import math
 import random
 from datetime import datetime
+from collections import defaultdict
+from openpyxl.styles import PatternFill
 from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
-from collections import defaultdict
 from pgmpy.inference import VariableElimination
-from openpyxl.styles import PatternFill
 
 ############################
 # Section 1: Program Start #
@@ -33,12 +33,12 @@ ValueTag=".//{http://www.dke.de/CAEX}Value"
 internalLinkTag=".//{http://www.dke.de/CAEX}InternalLink"
 
 if __name__ == "__main__":
-    amlFile = ET.parse('Generic_CPS.aml')
+    amlFile = ET.parse('Generic_CPS_Mitigation.aml')
     root = amlFile.getroot()
 
 def get_valid_date():
     while True:
-        date_input = input("Enter date of first installation and use for the machine (in the format YYYY-MM-DD) or leave blank for default (2024-01-01): ")
+        date_input = input("Enter system installation date (in the format YYYY-MM-DD) or leave blank for default (2024-01-01): ")
         if not date_input:
             return "2024-01-01"  # Default date if no input
         try:
@@ -46,6 +46,7 @@ def get_valid_date():
             return date_input
         except ValueError:
             print("Invalid date format. Please try again.")
+  
             
 def calculate_days_and_hours(start_date):
     start_date = datetime.strptime(start_date, "%Y-%m-%d")
@@ -54,6 +55,7 @@ def calculate_days_and_hours(start_date):
         reference_date = datetime.strptime(reference_date_input, "%Y-%m-%d")
     else:
         reference_date = datetime.now()
+    print("[*]: Reference date:", reference_date)
     time_difference = reference_date - start_date
     days = time_difference.days
     remaining_seconds = time_difference.seconds
@@ -61,7 +63,7 @@ def calculate_days_and_hours(start_date):
     return days, remaining_hours
 
 start_date_str = get_valid_date()
-print("You entered:", start_date_str)
+print("[*]: System installation date:", start_date_str)
 days, hours = calculate_days_and_hours(start_date_str)
 t=days*24 + (24-hours)
 print("Time in hours since installation: ", t, ", Number of days:", days, ", Number of hours:", hours, "\n")
