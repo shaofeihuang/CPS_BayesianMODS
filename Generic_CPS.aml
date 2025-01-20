@@ -4,7 +4,7 @@
   <SourceDocumentInformation OriginName="Pushparaj Bhosale" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginVersion="6.2.7.0" LastWritingDateTime="2025-01-19T08:36:12.7005602+08:00" OriginProjectID="DataSource" OriginProjectTitle="AML based data source for integrated risk assessment" OriginRelease="6.2.7.0" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" />
   <InstanceHierarchy Name="Generic CPS">
     <Version>0</Version>
-    <InternalElement Name="Cyber System" ID="CyberSystem" RefBaseSystemUnitPath="AssetOfICS/Hardware/Process device/Work station">
+    <InternalElement Name="Cyber System" ID="CyberSystem" RefBaseSystemUnitPath="AssetOfICS/Hardware/Process device/Workstation">
       <ExternalInterface Name="IOfromWS" ID="78e1f2c8-41fe-4f8b-81b6-245692677754" RefBaseClassPath="ConnectionBetnAssets/Network based" />
       <ExternalInterface Name="IOfromUser" ID="6b22e07b-053c-44e2-8aed-7e76cb2ad5cb" RefBaseClassPath="ConnectionBetnAssets/User based" />
       <ExternalInterface Name="toHazard" ID="43422fd2-2a29-4185-a83e-acfde36f1cad" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
@@ -388,7 +388,7 @@
           <ExternalInterface Name="IOfromController" ID="8c32edd2-9e17-4f2c-af8f-0b522ba3cbba" RefBaseClassPath="ConnectionBetnAssets/Network based" />
           <ExternalInterface Name="IOfromController" ID="f7cca4aa-5443-424b-86f4-0c8c8deaa225" RefBaseClassPath="ConnectionBetnAssets/Logic based" />
         </SystemUnitClass>
-        <SystemUnitClass Name="Work station" ID="17945b57-6f0d-4017-881e-41a126e3f90e">
+        <SystemUnitClass Name="Workstation" ID="17945b57-6f0d-4017-881e-41a126e3f90e">
           <ExternalInterface Name="IOfromWS" ID="52d38b0f-d3f7-4bdb-abc0-16e9dabea340" RefBaseClassPath="ConnectionBetnAssets/Network based" />
           <ExternalInterface Name="IOfromWS" ID="fa8ebac1-c41b-465d-8fc2-a6582d09e1f7" RefBaseClassPath="ConnectionBetnAssets/Logic based" />
         </SystemUnitClass>

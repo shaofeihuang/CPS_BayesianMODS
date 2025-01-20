@@ -65,6 +65,18 @@ print("You entered:", start_date_str)
 days, hours = calculate_days_and_hours(start_date_str)
 t=days*24 + (24-hours)
 print("Time in hours since installation: ", t, ", Number of days:", days, ", Number of hours:", hours, "\n")
+
+sap_input = input("Enter probability of successful security attack (SA) (0.01% < value < 10%) or leave blank for default (1%): ")
+
+if not sap_input:
+    sap_percent = 1  # Default value if no input
+else:
+    sap_percent = float(sap_input)
+
+if 0.01 <= sap_percent <= 10:
+    sap = sap_percent / 100
+else:
+    print("ERROR: Input a valid SA value.")
 ############################
 #     End of Section 1     #
 ############################
@@ -96,7 +108,7 @@ AutomationPyramidStatus = {
     'AssetOfICS/Hardware/Process device/Actuator': [],
     'AssetOfICS/Hardware/Process device/Sensor': [],
     'AssetOfICS/Hardware/Process device/Controller': [],
-    'AssetOfICS/Hardware/Process device/Work station': [],
+    'AssetOfICS/Hardware/Process device/Workstation': [],
     'AssetOfICS/User': []
 }
 max_num_parents = 0
@@ -324,8 +336,7 @@ for element in total_elements:
 ############################################################################
 def generate_cpd_values_occur(num_states, num_parents, hazard_node=False, vulnerability_node=False, process_node=False):
     cpd_values = np.zeros((num_states, 2 ** num_parents))
-    #random_number = random.uniform(0.1, 0.5)
-    
+
     if hazard_node:
         if num_parents == 0:
             cpd_values[0, 0] = 0.5
@@ -335,8 +346,9 @@ def generate_cpd_values_occur(num_states, num_parents, hazard_node=False, vulner
             cpd_values[0, 1] = 0
             cpd_values[1, 0] = 1 - cpd_values[0, 0]
             cpd_values[1, 1] = 1 - cpd_values[0, 1]
-        elif 2<=num_parents <= max_num_parents:
+        elif 2 <= num_parents <= max_num_parents:
             cpd_values=generate_cpd_values_hazard(num_parents)
+
     elif vulnerability_node:
         probability_of_exposure_for_node = matching_vulnerability_nodes[0]['Probability of Exposure']
         pofe = float(probability_of_exposure_for_node)        
@@ -348,8 +360,6 @@ def generate_cpd_values_occur(num_states, num_parents, hazard_node=False, vulner
             cpd_values[1, :-1] = 1 - pofe * sap # parent vulnerability is unexposed
             cpd_values[0, -1] = 0	            # parent vulnerability is exposed
             cpd_values[1, -1] = 1
-            cpd_values[0, 0] = 1
-            cpd_values[1, 0] = 0
     
     elif process_node:
         ref_base_for_node = matching_process_nodes[0]['RefBaseSystemUnitPath']    
@@ -357,18 +367,18 @@ def generate_cpd_values_occur(num_states, num_parents, hazard_node=False, vulner
                                  'AssetOfICS/Hardware/Process device/Sensor',
                                  'AssetOfICS/Hardware/Machine', 
                                  'AssetOfICS/Hardware/Process device/Controller',
-                                 'AssetOfICS/Hardware/Process device/Work station']:
+                                 'AssetOfICS/Hardware/Process device/Workstation']:
             probability_of_failure_for_node = matching_process_nodes[0]['Probability of Failure']
             if probability_of_failure_for_node:
                 poff = float(probability_of_failure_for_node)
-                cpd_values[0, :-1] = 1.0
-                cpd_values[1, :-1] = 0.0
+                cpd_values[0, :-1] = 1
+                cpd_values[1, :-1] = 0
                 cpd_values[0, -1] = poff
                 cpd_values[1, -1] = 1 - poff
             else:
-                cpd_values[0, :-1] = 1.0
-                cpd_values[1, :-1] = 0.0
-                cpd_values[0, -1] = 0.0
+                cpd_values[0, :-1] = 1
+                cpd_values[1, :-1] = 0
+                cpd_values[0, -1] = 0
                 cpd_values[1, -1] = 1
         elif ref_base_for_node == 'AssetOfICS/User':
             probability_of_human_error_for_node = matching_process_nodes[0]['Probability of Human Error']
@@ -382,13 +392,12 @@ def generate_cpd_values_occur(num_states, num_parents, hazard_node=False, vulner
             cpd_values[1, 0] = 1 - poff
 
     cpd_values /= np.sum(cpd_values, axis=0)  # Normalize the CPD values
-
     return cpd_values.reshape((num_states, -1))
 
 def generate_cpd_values_impact_(num_states, num_parents, hazard_node=False, vulnerability_node=False, process_node=False):
     cpd_values = np.zeros((num_states, 2 ** num_parents))
-    #random_number = random.uniform(0.1, 0.5)
     current_entry = next((entry for entry in result_list if entry['Element'] == node), None)
+
     if hazard_node:
         if num_parents == 0:
             cpd_values[0, 0] = 0.5
@@ -397,15 +406,13 @@ def generate_cpd_values_impact_(num_states, num_parents, hazard_node=False, vuln
             cpd_values[0, 0] = 1
             cpd_values[0, 1] = 0
             cpd_values[1, 0] = 1 - cpd_values[0, 0]
-            cpd_values[1, 1] = 1 - cpd_values[0, 1]
-            
-        elif 2<=num_parents <= max_num_parents:
+            cpd_values[1, 1] = 1 - cpd_values[0, 1]    
+        elif 2 <= num_parents <= max_num_parents:
             cpd_values=generate_cpd_values_impact(num_parents)
     
     elif vulnerability_node:
         probability_of_impact_for_node = matching_vulnerability_nodes[0]['Probability of Impact']
         pofi = float(probability_of_impact_for_node)
-        
         if num_parents == 0:
             cpd_values[0, 0] = pofi * sap
             cpd_values[1, 0] = 1 - pofi * sap
@@ -417,29 +424,25 @@ def generate_cpd_values_impact_(num_states, num_parents, hazard_node=False, vuln
     
     elif process_node:
         ref_base_for_node = matching_process_nodes[0]['RefBaseSystemUnitPath']
-        
         if ref_base_for_node in ['AssetOfICS/Hardware/Process device/Actuator',
                                  'AssetOfICS/Hardware/Process device/Sensor',
                                  'AssetOfICS/Hardware/Machine', 
                                  'AssetOfICS/Hardware/Process device/Controller',
-                                 'AssetOfICS/Hardware/Process device/Work station']:
+                                 'AssetOfICS/Hardware/Process device/Workstation']:
             probability_of_failure_for_node = matching_process_nodes[0]['Probability of Failure']
-
             if probability_of_failure_for_node:
-                cpd_values[0, :-1] = 1.0
-                cpd_values[1, :-1] = 0.0
+                cpd_values[0, :-1] = 1
+                cpd_values[1, :-1] = 0
                 cpd_values[0, -1] = current_entry['Number of children']
                 cpd_values[1, -1] = 1 - current_entry['Number of children']
             else:
-                cpd_values[0, :-1] = 1.0
-                cpd_values[1, :-1] = 0.0
-                cpd_values[0, -1] = 0.0
-                cpd_values[1, -1] = 1
-                
+                cpd_values[0, :-1] = 1
+                cpd_values[1, :-1] = 0
+                cpd_values[0, -1] = 0
+                cpd_values[1, -1] = 1   
         elif ref_base_for_node == 'AssetOfICS/User':
             cpd_values[0, 0] = current_entry['Number of children']
             cpd_values[1, 0] = 1 - current_entry['Number of children']
-
         else:
             cpd_values[0, 0] = current_entry['Number of children']
             cpd_values[1, 0] = 1 - current_entry['Number of children']
@@ -466,7 +469,7 @@ def select_start_end_nodes(total_elements):
 ############################################################################
 
 #########################################################################
-# Section 4: Bayesian Belief Network (BBN) Implementation for Occurence #
+# Section 4: Bayesian Belief Network (BBN) Implementation for Occurrence #
 #########################################################################
 cpds = {}
 cpd_values_list = []
@@ -479,20 +482,6 @@ bbn = BayesianNetwork()
 connections = connections_mapped
 bbnNodes=bbn.add_nodes_from(total_elements)
 bbn.add_edges_from([(connection['from'], connection['to']) for connection in connections])
-
-sap_input = input("Enter probability of successful security attack (SA) (0.01% < value < 10%) or leave blank for default (1%): ")
-
-if not sap_input:
-    sap_percent = 1  # Default value if no input
-else:
-    sap_percent = float(sap_input)
-
-if 0.01 <= sap_percent <= 10:
-    sap = sap_percent / 100
-else:
-    print("ERROR: Input a valid SA value.")
-
-cpd_values_list = []
 
 for node in bbn.nodes():
     num_parents = len(bbn.get_parents(node))
@@ -529,10 +518,10 @@ for element1 in HazardinSystem:
         node2=element2['Element']
         child_num = element2['Number of children']
         if node1 == node2:
-            if child_num == 0.0:
+            if child_num == 0:
                 last_node = node1
 
-print("\n[*] Last node in BBN (Occurence):", last_node)
+print("\n[*] Last node in BBN (Occurrence):", last_node)
 
 for node1, node2 in itertools.product(total_elements, repeat=2):
     if node1 == node2:
@@ -595,8 +584,8 @@ bbn_impact.add_cpds(*cpds.values())
 #############################
 # Section 6: BBN Operations #
 #############################
-print("[*] BBN (Occurence) structure is consistent:", bbn.check_model())
-print("[*] BBN (Severity/Impact) structure is consistent:", bbn_impact.check_model())
+print("[*] Checking BBN (Occurrence) structure consistency:", bbn.check_model())
+print("[*] Checking BBN (Severity/Impact) structure consistency:", bbn_impact.check_model())
 
 inference = VariableElimination(bbn)
 inference2 = VariableElimination(bbn_impact)
@@ -615,7 +604,7 @@ plt.axis('off')
 plt.show()
 
 # Shortest paths
-print('[*] Shortest path in BBN (Occurence)')
+print('[-] Find shortest path in BBN (Occurrence)')
 graph = nx.DiGraph(bbn.edges)
 
 valid_nodes = {"v1", "v2", "v3", "v4", "v5", "v6"}
@@ -636,13 +625,13 @@ target_node = "CPS_Termination"
 
 try:
     shortest_path = nx.shortest_path(graph, source=source_node, target=target_node)
-    print(f"[*]] Shortest path from {source_node} to {target_node} is: {shortest_path}")
+    print(f"[*] Shortest path from {source_node} to {target_node} is: {shortest_path}")
 except nx.NetworkXNoPath:
     print(f"[!] No path exists between {source_node} and {target_node}.")
 except nx.NodeNotFound as e:
     print(f"[!] Error: {e}")
 
-print('[*] Shortest path in BBN (Severity/Impact)')
+print('[-] Find shortest path in BBN (Severity/Impact)')
 graph = nx.DiGraph(bbn_impact.edges)
 try:
     shortest_path = nx.shortest_path(graph, source=source_node, target=target_node)
@@ -677,7 +666,7 @@ for node in total_elements:
         prob_P3L_if_node_fail_values = prob_P3L_if_node_fail.values
         min_value = min(prob_P3L_if_node_fail_values)
         max_value = max(prob_P3L_if_node_fail_values)
-        min_value = round(min_value, 2) -0.01  # Restrict minimum value to 2 decimal places
+        min_value = round(min_value, 2) - 0.01  # Restrict minimum value to 2 decimal places
         max_value = round(max_value, 2) + 0.01  # Restrict maximum value to 2 decimal places and add 0.01
         normal_prob_P3L_if_node_fail = (prob_P3L_if_node_fail_values[0] - min_value) / (max_value - min_value)
         node_prob_dict[node] = normal_prob_P3L_if_node_fail
@@ -713,7 +702,7 @@ for nodes in total_elements:
     if nodes==last_node:
         prob_termination=inference.query(variables=[nodes])
         print("\n")
-        print("[*] CPT (Occurence) of CPS System Termination:\n", prob_termination)
+        print("[*] CPT (Occurrence) of CPS System Termination:\n", prob_termination)
         impact_termination=inference2.query(variables=[nodes])
         print("[*] CPT (Severity/Impact) of CPS System Termination:\n", impact_termination)        
         cpd_prob = prob_termination.values
@@ -723,7 +712,7 @@ for nodes in total_elements:
         print("[*] Probability of Severity/Impact:", cpd_impact[0])
         risk_prob = cpd_prob[0]*cpd_impact[0]
         #print("Raw Risk Value:", risk_prob)
-        normal_risk = (risk_prob)/(0.0674)
+        normal_risk = (risk_prob) / (0.0674)
         print('[*] Current normalised risk score: {:.2f} %'.format(normal_risk * 100))
         print('--------------------------------------------------------')
         if normal_risk<0.2:
