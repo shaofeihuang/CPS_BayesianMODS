@@ -64,8 +64,8 @@ def calculate_days_and_hours(start_date):
 start_date_str = get_valid_date()
 print("[*]: System installation date:", start_date_str)
 days, hours = calculate_days_and_hours(start_date_str)
-t=days*24 + (24-hours)
-print("Time in hours since installation: ", t, ", Number of days:", days, ", Number of hours:", hours, "\n")
+t = days * 4 + (24 - hours)
+print("Time since installation:", days, "days and ", hours, "hours (Total:", t, "hours)\n")
 
 sap_input = input("Enter probability of successful security attack (SA) (0.01% < value < 10%) or leave blank for default (1%): ")
 
