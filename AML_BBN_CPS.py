@@ -3,9 +3,9 @@
 Risk Assessment for Generic Cyber-Physical Systems (CPS) using Bayesian Belief Networks (BBN) based on AutomationML Models
 (Based on code by Pushparaj BHOSALE: https://github.com/Pbhosale1991/AML-BBN-RA)
 Author: Huang Shaofei
-Last update: 2025-01-18                                                         
+Last update: 2025-01-20
 Latest version at https://github.com/shaofeihuang/CPS-Risk_Assessment-BBN
-###################################################################################
+############################################################################################################################
 '''
 import numpy as np
 import xml.etree.ElementTree as ET
@@ -33,7 +33,7 @@ ValueTag=".//{http://www.dke.de/CAEX}Value"
 internalLinkTag=".//{http://www.dke.de/CAEX}InternalLink"
 
 if __name__ == "__main__":
-    amlFile = ET.parse('Generic_CPS.aml')
+    amlFile = ET.parse('Generic_CPS_Mitigation.aml')
     root = amlFile.getroot()
 
 def get_valid_date():
@@ -211,6 +211,13 @@ for internal_element in internal_elements:
     else:
         probability_of_impact_vulnerability = 0
 
+    probability_of_mitigation_value = get_attribute_value(internal_element, 'Probability of Mitigation')
+    probability_of_mitigation = None
+    if probability_of_mitigation_value is not None:
+        probability_of_mitigation = probability_of_mitigation_value
+    else:
+        probability_of_mitigation = 0
+
     human_error_percentage_value = get_attribute_value(internal_element, 'HumanErrorEstimationPercentage')
     probability_of_human_error = None
     if human_error_percentage_value is not None:
@@ -224,6 +231,7 @@ for internal_element in internal_elements:
         'Probability of Failure': probability_of_failure,
         'Probability of Exposure': probability_of_exposure,
         'Probability of Impact' : probability_of_impact_vulnerability,
+        'Probability of Mitigation' : probability_of_mitigation,
         'Probability of Human Error': probability_of_human_error,
         'RefBaseSystemUnitPath': ref_base_system_unit_path
     }
@@ -238,9 +246,13 @@ for internal_element in internal_elements:
     probability_data.append(internal_element_data)
 
 ## Data Check
-#for data in probability_data:
-#    print("ID:", data['ID'], "Name:", data['Name'], "RefSystemUnitPath:", data['RefBaseSystemUnitPath'],
-#          "Prob of Failure:", data['Probability of Failure'], "Prob of Exposure:", data['Probability of Exposure'], "Prob of Human Error:", data['Probability of Human Error'])
+'''
+for data in probability_data:
+    print("ID:", data['ID'], "Name:", data['Name'], "RefSystemUnitPath:", data['RefBaseSystemUnitPath'],
+          "Prob of Failure:", data['Probability of Failure'], "Prob of Exposure:", data['Probability of Exposure'],
+          "Prob of Impact:", data['Probability of Impact'], "Prob of Mitigation:", data['Probability of Mitigation'],
+          "Prob of Human Error:", data['Probability of Human Error'])
+'''
 
 for internal_element in internal_elements:
     external_interfaces = internal_element.findall(externalInterfaceTag)
@@ -417,10 +429,11 @@ def generate_cpd_values_impact_(num_states, num_parents, hazard_node=False, vuln
             cpd_values=generate_cpd_values_impact(num_parents)
     
     elif vulnerability_node:
-        probability_of_impact_for_node = matching_vulnerability_nodes[0]['Probability of Impact']
+        probability_of_impact_for_node = matching_vulnerability_nodes[0]['Probability of Impact'] * ( 1 - matching_vulnerability_nodes[0]['Probability of Mitigation'])
         pofi = float(probability_of_impact_for_node)
+        #print("[INFO] Prob of Impact:", pofi)
         if num_parents == 0:
-            cpd_values[0, 0] = pofi # corrected from original code: pofi * sap
+            cpd_values[0, 0] = pofi
             cpd_values[1, 0] = 1 - pofi
         elif num_parents >= 1:
             cpd_values[0, :-1] = 1
@@ -527,7 +540,7 @@ for element1 in HazardinSystem:
             if child_num == 0:
                 last_node = node1
 
-print("\n[*] Last node in BBN (Occurrence):", last_node)
+print("\n[*] Last node in BBN:", last_node)
 
 for node1, node2 in itertools.product(total_elements, repeat=2):
     if node1 == node2:
@@ -610,19 +623,21 @@ plt.axis('off')
 plt.show()
 
 # Shortest paths
-print('[-] Find shortest path in BBN (Occurrence)')
+print('[-] Bayesian Belief Network (BBN) Pathfinder')
 graph = nx.DiGraph(bbn.edges)
 
-valid_nodes = {"v1", "v2", "v3", "v4", "v5", "v6"}
+valid_nodes = {"user", "v1", "v2", "v3", "v4", "v5", "v6"}
 
 while True:
-    source_node_input = input("Enter source node (V1-V6) or leave blank for default (V2: Tampering): ").strip()
+    source_node_input = input("Enter source node (User, V1-V6) or leave blank for default (V2: Tampering): ").strip()
     if not source_node_input:  # Default to "V2" if input is blank
         source_node = "V2"
         break
     # Convert input to lowercase and check if it's valid
     if source_node_input.lower() in valid_nodes:
         source_node = source_node_input.upper()  # Convert to uppercase for consistency
+        if source_node == "USER":
+            source_node = "User"
         break
     else:
         print("[!] Invalid input. Please enter a valid node (V1-V6).")
@@ -630,18 +645,27 @@ while True:
 target_node = "CPS_Termination"
 
 try:
-    shortest_path = nx.shortest_path(graph, source=source_node, target=target_node)
-    print(f"[*] Shortest path from {source_node} to {target_node} is: {shortest_path}")
-except nx.NetworkXNoPath:
-    print(f"[!] No path exists between {source_node} and {target_node}.")
-except nx.NodeNotFound as e:
-    print(f"[!] Error: {e}")
+    all_paths = list(nx.all_simple_paths(graph, source=source_node, target=target_node))
+    if not all_paths:
+        print(f"[!] No paths exist between {source_node} and {target_node}.")
+    else:
+        # Sort paths by length
+        sorted_paths = sorted(all_paths, key=len)
 
-print('[-] Find shortest path in BBN (Severity/Impact)')
-graph = nx.DiGraph(bbn_impact.edges)
-try:
-    shortest_path = nx.shortest_path(graph, source=source_node, target=target_node)
-    print(f"[*] Shortest path from {source_node} to {target_node} is: {shortest_path}")
+        # Determine shortest length
+        shortest_length = len(sorted_paths[0])
+
+        choice = input("[+] Enter any key to view all BBN paths or leave blank for default (display shortest path(s) only): ")
+        if not choice:
+            shortest_paths = [path for path in sorted_paths if len(path) == shortest_length]
+            print(f"[*] Shortest path(s) from {source_node} to {target_node}:")
+            for i, path in enumerate(shortest_paths, 1):
+                print(f"  {i}: {path}")
+        else:
+            print(f"[*] All paths from {source_node} to {target_node}, sorted by length:")
+            for i, path in enumerate(sorted_paths, 1):
+                print(f"  {i}: {path}")
+
 except nx.NetworkXNoPath:
     print(f"[!] No path exists between {source_node} and {target_node}.")
 except nx.NodeNotFound as e:
@@ -714,12 +738,12 @@ for nodes in total_elements:
         cpd_prob = prob_termination.values
         cpd_impact = impact_termination.values
         print('--------------------------------------------------------')
-        print("[*] Probability of CPS Termination:", cpd_prob[0])
-        print("[*] Probability of Severity/Impact:", cpd_impact[0])
+        print("[*] Posterior probability of CPS Termination:", cpd_prob[0])
+        print("[*] Posterior severity/impact of CPS Termination:", cpd_impact[0])
         risk_prob = cpd_prob[0]*cpd_impact[0]
         #print("Raw Risk Value:", risk_prob)
         normal_risk = (risk_prob) / (0.0674)
-        print('[*] Current normalised risk score: {:.2f} %'.format(normal_risk * 100))
+        print('[*] Normalised risk score: {:.2f} %'.format(normal_risk * 100))
         print('--------------------------------------------------------')
         if normal_risk<0.2:
             print('[----] CPS System is under NEGLIGIBLE risk (less than 20%)')

@@ -61,13 +61,13 @@
       <RoleRequirements RefBaseRoleClassPath="Requirements/Security" />
       <RoleRequirements RefBaseRoleClassPath="Requirements/Safety" />
     </InternalElement>
-    <InternalElement Name="User" ID="Operator" RefBaseSystemUnitPath="AssetOfICS/User">
+    <InternalElement Name="User" ID="User" RefBaseSystemUnitPath="AssetOfICS/User">
       <Attribute Name="HumanErrorEstimationPercentage" AttributeDataType="xs:string">
         <Value>5</Value>
       </Attribute>
       <ExternalInterface Name="IOfromUser" ID="1c7e6deb-50b1-4b6f-8f40-ccd370d0dd06" RefBaseClassPath="ConnectionBetnAssets/User based" />
       <ExternalInterface Name="toHazard" ID="870bb67c-df05-42e3-9bb8-1783bdb2e5e6" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
-      <InternalLink RefPartnerSideA="870bb67c-df05-42e3-9bb8-1783bdb2e5e6" RefPartnerSideB="9ea16751-481f-4c89-8d2d-f1e857fb95c1" Name="Operator_to_Haz01" />
+      <InternalLink RefPartnerSideA="870bb67c-df05-42e3-9bb8-1783bdb2e5e6" RefPartnerSideB="9ea16751-481f-4c89-8d2d-f1e857fb95c1" Name="User_to_Haz01" />
       <InternalLink RefPartnerSideA="870bb67c-df05-42e3-9bb8-1783bdb2e5e6" RefPartnerSideB="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" Name="Link" />
       <InternalLink RefPartnerSideA="1c7e6deb-50b1-4b6f-8f40-ccd370d0dd06" RefPartnerSideB="6b22e07b-053c-44e2-8aed-7e76cb2ad5cb" Name="InternalLink" />
       <InternalLink RefPartnerSideA="1c7e6deb-50b1-4b6f-8f40-ccd370d0dd06" RefPartnerSideB="8c5b9ac7-9485-4bf5-a773-e972101d9f8d" Name="InternalLink" />
