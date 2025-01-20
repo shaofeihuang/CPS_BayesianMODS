@@ -263,7 +263,7 @@
           <Value>0.56</Value>
         </Attribute>
         <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
-          <Value>1</Value>
+          <Value>0</Value>
         </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.111265</Value>
