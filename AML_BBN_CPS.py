@@ -47,7 +47,6 @@ def get_valid_date():
         except ValueError:
             print("Invalid date format. Please try again.")
   
-            
 def calculate_days_and_hours(start_date):
     start_date = datetime.strptime(start_date, "%Y-%m-%d")
     reference_date_input = input("Enter reference date (YYYY-MM-DD) or leave blank for current date: ")
