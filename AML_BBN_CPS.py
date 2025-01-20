@@ -33,7 +33,7 @@ ValueTag=".//{http://www.dke.de/CAEX}Value"
 internalLinkTag=".//{http://www.dke.de/CAEX}InternalLink"
 
 if __name__ == "__main__":
-    amlFile = ET.parse('Generic_CPS_Mitigation.aml')
+    amlFile = ET.parse('Generic_CPS.aml')
     root = amlFile.getroot()
 
 def get_valid_date():
@@ -67,17 +67,22 @@ days, hours = calculate_days_and_hours(start_date_str)
 t = days * 4 + (24 - hours)
 print("Time since installation:", days, "days and ", hours, "hours (Total:", t, "hours)\n")
 
-sap_input = input("Enter probability of successful security attack (SA) (0.01% < value < 10%) or leave blank for default (1%): ")
-
-if not sap_input:
-    sap_percent = 1  # Default value if no input
-else:
-    sap_percent = float(sap_input)
-
-if 0.01 <= sap_percent <= 10:
-    sap = sap_percent / 100
-else:
-    print("ERROR: Input a valid SA value.")
+while True:
+    sap_input = input("Enter probability of successful security attack (SA) (0.01% < value < 10%) or leave blank for default (1%): ")
+    try:
+        if not sap_input:
+            sap_percent = 1  # Default to 1% if no input
+        else:
+            sap_percent = float(sap_input)
+        
+        # Check if the input is within the valid range
+        if 0.01 <= sap_percent <= 10:
+            sap = sap_percent / 100
+            break
+        else:
+            print("[!] ERROR: Input a valid SA value between 0.01% and 10%.")
+    except ValueError:
+        print("Invalid input. Please enter a numeric value.")
 ############################
 #     End of Section 1     #
 ############################
@@ -415,13 +420,13 @@ def generate_cpd_values_impact_(num_states, num_parents, hazard_node=False, vuln
         probability_of_impact_for_node = matching_vulnerability_nodes[0]['Probability of Impact']
         pofi = float(probability_of_impact_for_node)
         if num_parents == 0:
-            cpd_values[0, 0] = pofi * sap
-            cpd_values[1, 0] = 1 - pofi * sap
+            cpd_values[0, 0] = pofi # corrected from original code: pofi * sap
+            cpd_values[1, 0] = 1 - pofi
         elif num_parents >= 1:
-            cpd_values[0, :-1] = 1  	        # parent vulnerability is exposed
-            cpd_values[1, :-1] = 0              # parent vulnerability is unexposed
-            cpd_values[0, -1] = pofi * sap	    # parent vulnerability is exposed
-            cpd_values[1, -1] = 1 - pofi * sap	# parent vulnerability is unexposed
+            cpd_values[0, :-1] = 1
+            cpd_values[1, :-1] = 0
+            cpd_values[0, -1] = pofi
+            cpd_values[1, -1] = 1 - pofi
     
     elif process_node:
         ref_base_for_node = matching_process_nodes[0]['RefBaseSystemUnitPath']
