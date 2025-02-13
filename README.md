@@ -2,7 +2,7 @@
 
 This repository contains code and resources for risk assessments using Bayesian Belief Networks (BBNs) specifically designed for generic Cyber-Physical Systems (CPS). The BBNs are constructed using AutomationML models, and consider probabilities of both cybersecurity vulnerabilities and physical hazards. This approach facilitates CPS risk assessments that integrate both cybersecurity and safety aspects, as well as a standardized markup language to incorporate information (such as threat intel) and domain expert inputs into the model. This work was inspired by Bhosale et al. (2024)'s paper which can be found here: https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10623880
 
-An adaptation of the approach as applied to a real-world example - the Stuxnet Attack (Reference: https://courses.cs.duke.edu/spring20/compsci342/netid/readings/cyber/stuxnet-ieee-spectrum.pdf) - is also included in this repository.
+An adaptation of the approach as applied to a real-world example - the Stuxnet Attack (Reference: [https://courses.cs.duke.edu/spring20/compsci342/netid/readings/cyber/stuxnet-ieee-spectrum.pdf](https://spectrum.ieee.org/the-real-story-of-stuxnet) - is also included in this repository.
 
 
 ## 1. AML_BBN_CPS.py
