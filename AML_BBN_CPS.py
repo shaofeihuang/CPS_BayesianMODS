@@ -33,7 +33,7 @@ ValueTag=".//{http://www.dke.de/CAEX}Value"
 internalLinkTag=".//{http://www.dke.de/CAEX}InternalLink"
 
 if __name__ == "__main__":
-    amlFile = ET.parse('Generic_CPS_Mitigation.aml')
+    amlFile = ET.parse('Generic_CPS.aml')
     root = amlFile.getroot()
 
 def get_valid_date():
