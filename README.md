@@ -14,7 +14,7 @@ This code demonstrates how this risk assessment approach can be applied to a rea
 ## 3. Generic_CPS.aml
 This is a markup file depicting a generic CPS based on the Automation Markup Language (AutomationML), edited using the AutomationML Editor. More information can be found here: https://www.automationml.org/
 
-## 4. Stuxnet_AML.aml
+## 4. Stuxnet.aml
 This is a markup file depicting the Stuxnet attack scenario based on the Automation Markup Language (AutomationML), edited using the AutomationML Editor.
 
 ## 5. Generic_CPS_BNN.xdsl
