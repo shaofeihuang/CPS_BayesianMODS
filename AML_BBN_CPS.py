@@ -3,7 +3,7 @@
 Risk Assessment for Generic Cyber-Physical Systems (CPS) using Bayesian Belief Networks (BBN) based on AutomationML Models
 (Based on code by Pushparaj BHOSALE: https://github.com/Pbhosale1991/AML-BBN-RA)
 Author: Huang Shaofei
-Last update: 2025-01-20
+Last update: 2025-02-13
 Latest version at https://github.com/shaofeihuang/CPS-Risk_Assessment-BBN
 ############################################################################################################################
 '''
