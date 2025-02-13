@@ -33,7 +33,7 @@ ValueTag=".//{http://www.dke.de/CAEX}Value"
 internalLinkTag=".//{http://www.dke.de/CAEX}InternalLink"
 
 if __name__ == "__main__":
-    amlFile = ET.parse('Stuxnet_AML.aml')
+    amlFile = ET.parse('Stuxnet.aml')
     root = amlFile.getroot()
 
 def get_valid_date():
