@@ -497,13 +497,13 @@ path_length_betn_nodes=[]
 path_length_betn_nodes_final=[]
 path_length_final_node = []
 
-bbn = BayesianNetwork()
+bbn_occurrence = BayesianNetwork()
 connections = connections_mapped
-bbnNodes=bbn.add_nodes_from(total_elements)
-bbn.add_edges_from([(connection['from'], connection['to']) for connection in connections])
+bbnNodes=bbn_occurrence.add_nodes_from(total_elements)
+bbn_occurrence.add_edges_from([(connection['from'], connection['to']) for connection in connections])
 
-for node in bbn.nodes():
-    num_parents = len(bbn.get_parents(node))
+for node in bbn_occurrence.nodes():
+    num_parents = len(bbn_occurrence.get_parents(node))
     num_states = 2  # Assuming binary states for each node
     matching_hazard_nodes = [element for element in HazardinSystem if element['ID'] == node]
     matching_vulnerability_nodes = [element for element in VulnerabilityinSystem if element['ID'] == node]
@@ -522,13 +522,13 @@ for node in bbn.nodes():
         cpd_values = generate_cpd_values_occur(num_states, num_parents, process_node=True)
 
     cpd = TabularCPD(variable=node, variable_card=num_states, values=cpd_values,
-                     evidence=bbn.get_parents(node), evidence_card=[2] * num_parents)
+                     evidence=bbn_occurrence.get_parents(node), evidence_card=[2] * num_parents)
 
     cpds[node] = cpd
     cpd_values_list.append((node, cpd_values.tolist(), cpd.variables, cpd.cardinality))
     
-bbn.add_cpds(*cpds.values())
-bbn_graph = bbn.to_markov_model()
+bbn_occurrence.add_cpds(*cpds.values())
+bbn_graph = bbn_occurrence.to_markov_model()
 
 last_node = None
 for element1 in HazardinSystem:
@@ -571,7 +571,7 @@ cpd_values_list_impact = []
 nodes_and_numberofParents =[]
 
 for node in bbn_impact.nodes():
-    num_parents = len(bbn.get_parents(node))
+    num_parents = len(bbn_occurrence.get_parents(node))
     num_states = 2
     cpd_values = None
 
@@ -590,7 +590,7 @@ for node in bbn_impact.nodes():
         cpd_values = generate_cpd_values_impact_(num_states, num_parents, process_node=True)
 
     cpd = TabularCPD(variable=node, variable_card=num_states, values=cpd_values,
-                     evidence=bbn.get_parents(node), evidence_card=[2] * num_parents)
+                     evidence=bbn_occurrence.get_parents(node), evidence_card=[2] * num_parents)
 
     cpds[node] = cpd
     cpd_values_list.append((node, cpd_values.tolist(), cpd.variables, cpd.cardinality))
@@ -603,16 +603,16 @@ bbn_impact.add_cpds(*cpds.values())
 #############################
 # Section 6: BBN Operations #
 #############################
-print("[*] Checking BBN (Occurrence) structure consistency:", bbn.check_model())
-print("[*] Checking BBN (Severity/Impact) structure consistency:", bbn_impact.check_model())
+print("[*] Checking BBN (Occurrence) structure consistency:", bbn_occurrence.check_model())
+print("[*] Checking BBN (Impact) structure consistency:", bbn_impact.check_model())
 
-inference = VariableElimination(bbn)
+inference = VariableElimination(bbn_occurrence)
 inference2 = VariableElimination(bbn_impact)
 
 # Plot BBN visual
 graph = nx.DiGraph()
-graph.add_nodes_from(bbn.nodes())
-graph.add_edges_from(bbn.edges())
+graph.add_nodes_from(bbn_occurrence.nodes())
+graph.add_edges_from(bbn_occurrence.edges())
 pos = nx.kamada_kawai_layout(graph, scale=2)
 nx.draw_networkx_nodes(graph, pos, node_color='lightblue', node_size=300)
 nx.draw_networkx_edges(graph, pos, arrows=True, arrowstyle='->', arrowsize=10)
@@ -624,7 +624,7 @@ plt.show()
 
 # Shortest paths
 print('[-] Bayesian Belief Network (BBN) Pathfinder')
-graph = nx.DiGraph(bbn.edges)
+graph = nx.DiGraph(bbn_occurrence.edges)
 
 valid_nodes = {"user", "v1", "v2", "v3", "v4", "v5", "v6"}
 
@@ -681,25 +681,27 @@ for node in total_elements:
             cpd_prob = prob_node.values
             cpd_imp = element[3]
             cpd_impact = impact_node.values        
-            risk_v1=cpd_prob[0] * cpd_imp
-            risk_v2=cpd_prob[0] * cpd_impact[0]
-            #print(cpd_prob[0], cpd_imp, risk)
+            risk_v1=cpd_prob[0] * cpd_imp       # Risk computed as probability of occurrence multiplied by 1/path_length (from node to end)
+            risk_v2=cpd_prob[0] * cpd_impact[0] # Risk computed as probability of occurrence multiplied by probability of impact
+            #print(node, "P_Occurrence:", cpd_prob[0], "P_Path:", cpd_imp, "P_Impact:", cpd_impact[0], "Risk V1:", risk_v1, "Risk V2:", risk_v2)
             risk_measurements.append([node, cpd_prob[0], cpd_imp, cpd_impact[0], risk_v1, risk_v2])
 
-# Sort nodes according to prob
+# Sort nodes according to posterior prob
 node_prob_dict = {}
 for node in total_elements:
     if node == last_node:
         pass
     else:
-        prob_P3L_if_node_fail = inference.query(variables=[last_node], evidence={node:0})
-        prob_P3L_if_node_fail_values = prob_P3L_if_node_fail.values
-        min_value = min(prob_P3L_if_node_fail_values)
-        max_value = max(prob_P3L_if_node_fail_values)
+        prob_if_node_fail = inference.query(variables=[last_node], evidence={node:0})
+        #print (node, "\n", prob_if_node_fail)
+        prob_if_node_fail_values = prob_if_node_fail.values
+        min_value = min(prob_if_node_fail_values)
+        max_value = max(prob_if_node_fail_values)
         min_value = round(min_value, 2) - 0.01  # Restrict minimum value to 2 decimal places
         max_value = round(max_value, 2) + 0.01  # Restrict maximum value to 2 decimal places and add 0.01
-        normal_prob_P3L_if_node_fail = (prob_P3L_if_node_fail_values[0] - min_value) / (max_value - min_value)
-        node_prob_dict[node] = normal_prob_P3L_if_node_fail
+        normal_prob_if_node_fail = (prob_if_node_fail_values[0] - min_value) / (max_value - min_value)
+        node_prob_dict[node] = normal_prob_if_node_fail
+#print (node_prob_dict)
 sorted_node_prob = sorted(node_prob_dict.items(), key=lambda x: x[1], reverse=True)
 
 # Save results to Excel worksheet
@@ -730,17 +732,32 @@ sorted_node_prob = sorted(node_prob_dict.items(), key=lambda x: x[1], reverse=Tr
 # Print results to console
 for nodes in total_elements:
     if nodes==last_node:
-        prob_termination=inference.query(variables=[nodes])
+        prob_termination=inference.query(variables=[nodes], evidence={source_node:0})
         print("\n")
         print("[*] CPT (Occurrence) of CPS System Termination:\n", prob_termination)
-        impact_termination=inference2.query(variables=[nodes])
-        print("[*] CPT (Severity/Impact) of CPS System Termination:\n", impact_termination)        
+        impact_termination=inference2.query(variables=[nodes], evidence={source_node:0})
+        print("[*] CPT (Impact) of CPS System Termination:\n", impact_termination)        
         cpd_prob = prob_termination.values
         cpd_impact = impact_termination.values
         print('--------------------------------------------------------')
-        print("[*] Posterior probability of CPS Termination:", cpd_prob[0])
-        print("[*] Posterior severity/impact of CPS Termination:", cpd_impact[0])
-        risk_prob = cpd_prob[0]*cpd_impact[0]
+        print("[*] Posterior probability of occurrence:", cpd_prob[0])
+        print("[*] Posterior probability of impact:", cpd_impact[0])
+        risk_score = cpd_prob[0] * cpd_impact[0]
+        print('[*] Risk score: {:.2f} %'.format(risk_score * 100))
+        print('--------------------------------------------------------')
+        if risk_score < 0.2:
+            print('[----] CPS System is under NEGLIGIBLE risk (less than 20%)')
+        elif 0.2 <= risk_score < 0.4:
+            print('[*---] CPS System is under LOW risk (between 20% and 40%)')
+        elif 0.4 <= risk_score < 0.6:
+            print('[**--] CPS System is under MEDIUM risk (between 40% and 60%)')
+        elif 0.6 <= risk_score < 0.8:
+            print('[***-] CPS System is under HIGH risk (between 60% and 80%)')
+        else:
+            print('[****] CPS System is under CRITICAL risk (greater than 80%)')
+    else:
+        pass
+'''
         #print("Raw Risk Value:", risk_prob)
         normal_risk = (risk_prob) / (0.0674)
         print('[*] Normalised risk score: {:.2f} %'.format(normal_risk * 100))
@@ -757,3 +774,4 @@ for nodes in total_elements:
             print('[****] CPS System is under CRITICAL risk (greater than 80%)')
     else:
         pass
+'''

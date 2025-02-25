@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CAEXFile SchemaVersion="3.0" FileName="Stuxnet_AML.aml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dke.de/CAEX" xsi:schemaLocation="http://www.dke.de/CAEX CAEX_ClassModel_V.3.0.xsd">
+<CAEXFile SchemaVersion="3.0" FileName="Stuxnet - Vuln.aml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dke.de/CAEX" xsi:schemaLocation="http://www.dke.de/CAEX CAEX_ClassModel_V.3.0.xsd">
   <SuperiorStandardVersion>AutomationML 2.10</SuperiorStandardVersion>
-  <SourceDocumentInformation OriginName="Pushparaj Bhosale" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginVersion="6.2.7.0" LastWritingDateTime="2025-02-10T10:55:19.8936572+08:00" OriginProjectID="DataSource" OriginProjectTitle="AML based data source for integrated risk assessment" OriginRelease="6.2.7.0" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" />
+  <SourceDocumentInformation OriginName="Pushparaj Bhosale" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginVersion="6.4.0.22" LastWritingDateTime="2025-02-24T15:55:44.9979356+08:00" OriginProjectID="DataSource" OriginProjectTitle="AML based data source for integrated risk assessment" OriginRelease="6.4.0.22" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" />
   <InstanceHierarchy Name="Stuxnet Example">
     <Version>0</Version>
     <InternalElement Name="ICS Workstation" ID="ICS_Workstation" RefBaseSystemUnitPath="AssetOfICS/Hardware/Process device/Workstation">
@@ -64,7 +64,7 @@
             <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
             <AuthorName></AuthorName>
           </Revision>
-          <Value>1E-07</Value>
+          <Value>0.0000148254</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string">
           <Value>04/01/2023</Value>
@@ -85,8 +85,8 @@
       </Attribute>
       <ExternalInterface Name="toHazard" ID="870bb67c-df05-42e3-9bb8-1783bdb2e5e6" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
       <ExternalInterface Name="toVulnerability" ID="74070941-2c10-46c7-a846-1cc17ccec0cc" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <InternalLink RefPartnerSideA="870bb67c-df05-42e3-9bb8-1783bdb2e5e6" RefPartnerSideB="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" Name="InternalLink" />
       <InternalLink RefPartnerSideA="74070941-2c10-46c7-a846-1cc17ccec0cc" RefPartnerSideB="47e39df6-9af5-4522-b445-9e17a83f2d83" Name="InternalLink" />
+      <InternalLink RefPartnerSideA="870bb67c-df05-42e3-9bb8-1783bdb2e5e6" RefPartnerSideB="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" Name="InternalLink" />
       <RoleRequirements RefBaseRoleClassPath="Requirements/Process" />
       <RoleRequirements RefBaseRoleClassPath="Requirements/Safety" />
       <RoleRequirements RefBaseRoleClassPath="Requirements/Security" />
@@ -94,32 +94,6 @@
     <InternalElement Name="ICS Network" ID="ICS_Network" RefBaseSystemUnitPath="AssetOfICS/Hardware/Network Devices/Switch">
       <ExternalInterface Name="IOfromSwitch" ID="9b76f505-94e8-4930-9fa3-39d7bd7fd21d" RefBaseClassPath="ConnectionBetnAssets/Network based" />
       <InternalLink RefPartnerSideA="9b76f505-94e8-4930-9fa3-39d7bd7fd21d" RefPartnerSideB="78e1f2c8-41fe-4f8b-81b6-245692677754" Name="InternalLink" />
-    </InternalElement>
-  </InstanceHierarchy>
-  <InstanceHierarchy Name="Hazards">
-    <Version>0</Version>
-    <InternalElement Name="Human-Related Hazards" ID="Haz01_Human" RefBaseSystemUnitPath="HazardforSystem/Hazard">
-      <Attribute Name="Name" AttributeDataType="xs:string" />
-      <Attribute Name="Probability" AttributeDataType="xs:string" />
-      <ExternalInterface Name="ToHaz01" ID="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
-      <InternalLink RefPartnerSideA="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefPartnerSideB="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" Name="InternalLink" />
-      <InternalLink RefPartnerSideA="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefPartnerSideB="7b556454-e105-48de-be58-f2822060eeb3" Name="InternalLink" />
-    </InternalElement>
-    <InternalElement Name="Cybersecurity Hazards" ID="Haz02_Cyber" RefBaseSystemUnitPath="HazardforSystem/Hazard">
-      <Attribute Name="Name" AttributeDataType="xs:string" />
-      <Attribute Name="Probability" AttributeDataType="xs:string" />
-      <ExternalInterface Name="ToHaz02" ID="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
-      <InternalLink RefPartnerSideA="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" RefPartnerSideB="2d86c86c-72a9-4bc7-9dca-99d29db05c62" Name="InternalLink" />
-      <InternalLink RefPartnerSideA="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" RefPartnerSideB="7b556454-e105-48de-be58-f2822060eeb3" Name="InternalLink" />
-    </InternalElement>
-    <InternalElement Name="Physical Hazards" ID="Haz03_Physical" RefBaseSystemUnitPath="HazardforSystem/Hazard">
-      <Attribute Name="Name" AttributeDataType="xs:string" />
-      <Attribute Name="Probability" AttributeDataType="xs:string" />
-      <ExternalInterface Name="ToHaz03" ID="7b556454-e105-48de-be58-f2822060eeb3" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
-      <InternalLink RefPartnerSideA="7b556454-e105-48de-be58-f2822060eeb3" RefPartnerSideB="eb997142-db18-4ef4-b338-d064afcf96e6" Name="InternalLink" />
-    </InternalElement>
-    <InternalElement Name="Centrifuge Failure" ID="Centrifuge_Failure" RefBaseSystemUnitPath="HazardforSystem/Hazard">
-      <ExternalInterface Name="ToCompromise" ID="eb997142-db18-4ef4-b338-d064afcf96e6" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
     </InternalElement>
   </InstanceHierarchy>
   <InstanceHierarchy Name="Vulnerabilities">
@@ -344,6 +318,31 @@
       <InternalLink RefPartnerSideA="933ca543-ac77-4916-a4fb-80e4287e6eff" RefPartnerSideB="563c778e-246c-40ea-8372-451569102a1f" Name="InternalLink" />
     </InternalElement>
   </InstanceHierarchy>
+<InstanceHierarchy Name="Hazards">
+    <Version>0</Version>
+    <InternalElement Name="Human-Related Hazards" ID="Haz01_Human" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="Probability" AttributeDataType="xs:string" />
+      <ExternalInterface Name="ToHaz01" ID="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefPartnerSideB="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" Name="InternalLink" />
+      <InternalLink RefPartnerSideA="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefPartnerSideB="7b556454-e105-48de-be58-f2822060eeb3" Name="InternalLink" />
+    </InternalElement>
+    <InternalElement Name="Cybersecurity Hazards" ID="Haz02_Cyber" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="Probability" AttributeDataType="xs:string" />
+      <ExternalInterface Name="ToHaz02" ID="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" RefPartnerSideB="2d86c86c-72a9-4bc7-9dca-99d29db05c62" Name="InternalLink" />
+      <InternalLink RefPartnerSideA="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" RefPartnerSideB="7b556454-e105-48de-be58-f2822060eeb3" Name="InternalLink" />
+    </InternalElement>
+    <InternalElement Name="Physical Hazards" ID="Haz03_Physical" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="Probability" AttributeDataType="xs:string" />
+      <ExternalInterface Name="ToHaz03" ID="7b556454-e105-48de-be58-f2822060eeb3" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+    </InternalElement>
+    <InternalElement Name="Centrifuge Failure" ID="Centrifuge_Failure" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <ExternalInterface Name="ToCompromise" ID="eb997142-db18-4ef4-b338-d064afcf96e6" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+    </InternalElement>
+  </InstanceHierarchy>  
   <InterfaceClassLib Name="ConnectionBetnAssets">
     <Version>0</Version>
     <InterfaceClass Name="Network based" />
@@ -417,12 +416,6 @@
       <ExternalInterface Name="IOfromUser" ID="72bfd734-8588-4801-9e7a-ed486ca78dd7" RefBaseClassPath="ConnectionBetnAssets/User based" />
     </SystemUnitClass>
   </SystemUnitClassLib>
-  <SystemUnitClassLib Name="HazardforSystem">
-    <Version>0</Version>
-    <SystemUnitClass Name="Hazard" ID="e5aa0b0e-32ee-4bb3-a28b-b08ac4cdc5f5">
-      <ExternalInterface Name="HazardRef" ID="e76420a9-0048-4aca-91b3-b7109a6e531b" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
-    </SystemUnitClass>
-  </SystemUnitClassLib>
   <SystemUnitClassLib Name="VulnerabilityforSystem">
     <Version>0</Version>
     <SystemUnitClass Name="Vulnerability" ID="61c989ba-67ff-4aa8-9daa-937a4d45e0a3">
@@ -430,6 +423,12 @@
       <Attribute Name="CVSS" AttributeDataType="xs:string" ID="b623ff6d-1c1a-4f45-b260-965e18c18863" />
       <Attribute Name="Attack Name" AttributeDataType="xs:string" />
       <ExternalInterface Name="VulnerabilityRef" ID="32ebc8a3-9568-4deb-a92e-e8647789d8a3" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+  <SystemUnitClassLib Name="HazardforSystem">
+    <Version>0</Version>
+    <SystemUnitClass Name="Hazard" ID="e5aa0b0e-32ee-4bb3-a28b-b08ac4cdc5f5">
+      <ExternalInterface Name="HazardRef" ID="e76420a9-0048-4aca-91b3-b7109a6e531b" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
     </SystemUnitClass>
   </SystemUnitClassLib>
   <AttributeTypeLib Name="AttributeTypeLib">
