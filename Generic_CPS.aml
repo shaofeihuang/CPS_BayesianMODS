@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CAEXFile SchemaVersion="3.0" FileName="Generic_CPS_Mitigation.aml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dke.de/CAEX" xsi:schemaLocation="http://www.dke.de/CAEX CAEX_ClassModel_V.3.0.xsd">
+<CAEXFile SchemaVersion="3.0" FileName="Generic_CPS.aml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dke.de/CAEX" xsi:schemaLocation="http://www.dke.de/CAEX CAEX_ClassModel_V.3.0.xsd">
   <SuperiorStandardVersion>AutomationML 2.10</SuperiorStandardVersion>
-  <SourceDocumentInformation OriginName="Pushparaj Bhosale" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginVersion="6.2.7.0" LastWritingDateTime="2025-01-20T12:55:08.2865175+08:00" OriginProjectID="DataSource" OriginProjectTitle="AML based data source for integrated risk assessment" OriginRelease="6.2.7.0" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" />
+  <SourceDocumentInformation OriginName="" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginVersion="6.2.7.0" LastWritingDateTime="2025-01-20T12:55:08.2865175+08:00" OriginProjectID="DataSource" OriginProjectTitle="AML representation of a generic Cyber-Physical System" OriginRelease="6.2.7.0" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" />
   <InstanceHierarchy Name="Generic CPS">
     <Version>0</Version>
     <InternalElement Name="Cyber System" ID="CyberSystem" RefBaseSystemUnitPath="AssetOfICS/Hardware/Process device/Workstation">

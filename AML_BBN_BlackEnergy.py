@@ -1,6 +1,6 @@
 '''
 ############################################################################################################################
-Risk Assessment for Stuxnet Attack Scenario using Bayesian Belief Networks (BBN) based on AutomationML Models
+Risk Assessment for BlackEnergy Attack Scenario using Bayesian Belief Networks (BBN) based on AutomationML Models
 (Adapted from code by Pushparaj BHOSALE: https://github.com/Pbhosale1991/AML-BBN-RA)
 Author: Huang Shaofei
 Last update: 2025-02-27
@@ -33,7 +33,7 @@ ValueTag=".//{http://www.dke.de/CAEX}Value"
 internalLinkTag=".//{http://www.dke.de/CAEX}InternalLink"
 
 if __name__ == "__main__":
-    amlFile = ET.parse('Stuxnet.aml')
+    amlFile = ET.parse('BlackEnergy.aml')
     root = amlFile.getroot()
 
 def get_valid_date():
@@ -432,6 +432,7 @@ def generate_cpd_values_impact_(num_states, num_parents, hazard_node=False, vuln
     elif vulnerability_node:
         probability_of_impact_for_node = matching_vulnerability_nodes[0]['Probability of Impact'] * ( 1 - matching_vulnerability_nodes[0]['Probability of Mitigation'])
         pofi = float(probability_of_impact_for_node)
+        #print (matching_vulnerability_nodes[0]['ID'], matching_vulnerability_nodes[0]['Probability of Impact'], pofi)
         if num_parents == 0:
             cpd_values[0, 0] = pofi
             cpd_values[1, 0] = 1 - pofi
@@ -557,9 +558,6 @@ for node1, node2 in itertools.product(total_elements, repeat=2):
             if node2==last_node:
                 path_length_final_node.append((node1, last_node, path_length, 1/path_length))
 
-## ('Haz01_Human', 'Centrifuge_Failure', 3, 0.3333333333333333)
-## ('Centrifuge', 'Centrifuge_Failure', 1, 1.0)
-
 #########################################################################
 #                          End of Section 4                             #
 #########################################################################
@@ -635,9 +633,9 @@ graph = nx.DiGraph(bbn_occurrence.edges)
 valid_nodes = {"user", "v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10"}
 
 while True:
-    source_node_input = input("Enter source node (User, V0-V10) or leave blank for default (V0)): ").strip()
-    if not source_node_input:  # Default to "V0" if input is blank
-        source_node = "V0"
+    source_node_input = input("Enter source node (User, V0-V10) or leave blank for default (User)): ").strip()
+    if not source_node_input:  # Default to "User" if input is blank
+        source_node = "User"
         break
     # Convert input to lowercase and check if it's valid
     if source_node_input.lower() in valid_nodes:
@@ -648,7 +646,7 @@ while True:
     else:
         print("[!] Invalid input. Please enter a valid node (V0-V6).")
 
-target_node = "Centrifuge_Failure"
+target_node = "Haz05_Disable_Electrical_Supply"
 
 try:
     all_paths = list(nx.all_simple_paths(graph, source=source_node, target=target_node))
@@ -739,9 +737,9 @@ sorted_node_prob = sorted(node_prob_dict.items(), key=lambda x: x[1], reverse=Tr
 for nodes in total_elements:
     if nodes==last_node:
         prob_failure=inference.query(variables=[nodes], evidence={source_node:1})
-        print("[*] CPT (Occurrence) of Centrifuge Failure:\n", prob_failure)
+        print("[*] CPT (Occurrence) of Disabled Electrical Supply:\n", prob_failure)
         impact_failure=inference2.query(variables=[nodes], evidence={source_node:1})
-        print("[*] CPT (Impact) of Centrifuge Failure:\n", impact_failure)        
+        print("[*] CPT (Impact) of Disabled Electrical Supply:\n", impact_failure)        
         cpd_prob = prob_failure.values
         cpd_impact = impact_failure.values
         print('--------------------------------------------------------')
