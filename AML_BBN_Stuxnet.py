@@ -427,7 +427,7 @@ def generate_cpd_values_impact_(num_states, num_parents, hazard_node=False, vuln
             cpd_values[1, 0] = 1 - cpd_values[0, 0]
             cpd_values[1, 1] = 1 - cpd_values[0, 1]    
         elif 2 <= num_parents <= max_num_parents:
-            cpd_values=generate_cpd_values_impact(num_parents)
+            cpd_values=generate_cpd_values_hazard(num_parents)
     
     elif vulnerability_node:
         probability_of_impact_for_node = matching_vulnerability_nodes[0]['Probability of Impact'] * ( 1 - matching_vulnerability_nodes[0]['Probability of Mitigation'])
@@ -636,9 +636,9 @@ graph = nx.DiGraph(bbn_occurrence.edges)
 valid_nodes = {"user", "v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10"}
 
 while True:
-    source_node_input = input("Enter source node (User, V0-V10) or leave blank for default (User)): ").strip()
+    source_node_input = input("Enter source node (User, V0-V10) or leave blank for default (V0)): ").strip()
     if not source_node_input:  # Default to "User" if input is blank
-        source_node = "User"
+        source_node = "V0"
         break
     # Convert input to lowercase and check if it's valid
     if source_node_input.lower() in valid_nodes:
@@ -693,7 +693,7 @@ for node in total_elements:
             #print(node, "P_Occurrence:", cpd_prob[0], "P_Path:", cpd_imp, "P_Impact:", cpd_impact[0], "Risk V1:", risk_v1, "Risk V2:", risk_v2)
             risk_measurements.append([node, cpd_prob[0], cpd_imp, cpd_impact[0], risk_v1, risk_v2])
 
-# Sort nodes according to posterior prob
+# Sort nodes according to posterior prob of occurrence
 node_prob_dict = {}
 for node in total_elements:
     if node == last_node:
@@ -739,12 +739,12 @@ sorted_node_prob = sorted(node_prob_dict.items(), key=lambda x: x[1], reverse=Tr
 # Print results to console
 for nodes in total_elements:
     if nodes==last_node:
-        prob_termination=inference.query(variables=[nodes], evidence={source_node:0})
-        print("[*] CPT (Occurrence) of Centrifuge Failure:\n", prob_termination)
-        impact_termination=inference2.query(variables=[nodes], evidence={source_node:0})
-        print("[*] CPT (Impact) of Centrifuge Failure:\n", impact_termination)        
-        cpd_prob = prob_termination.values
-        cpd_impact = impact_termination.values
+        prob_failure=inference.query(variables=[nodes], evidence={source_node:1})
+        print("[*] CPT (Occurrence) of Centrifuge Failure:\n", prob_failure)
+        impact_failure=inference2.query(variables=[nodes], evidence={source_node:1})
+        print("[*] CPT (Impact) of Centrifuge Failure:\n", impact_failure)        
+        cpd_prob = prob_failure.values
+        cpd_impact = impact_failure.values
         print('--------------------------------------------------------')
         print("[*] Posterior probability of occurrence:", cpd_prob[0])
         print("[*] Posterior probability of impact:", cpd_impact[0])

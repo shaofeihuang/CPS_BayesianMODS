@@ -74,7 +74,7 @@
       <ExternalInterface Name="toHazard" ID="2d86c86c-72a9-4bc7-9dca-99d29db05c62" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
       <ExternalInterface Name="toVulnerability" ID="08d7b60d-1491-445c-b7af-c5a42db700d2" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
       <InternalLink RefPartnerSideA="03fa53da-de21-4a90-aad0-d50220c7dac4" RefPartnerSideB="78e1f2c8-41fe-4f8b-81b6-245692677754" Name="InternalLink" />
-      <InternalLink RefPartnerSideA="2d86c86c-72a9-4bc7-9dca-99d29db05c62" RefPartnerSideB="eb997142-db18-4ef4-b338-d064afcf96e6" Name="InternalLink" />
+      <InternalLink RefPartnerSideA="2d86c86c-72a9-4bc7-9dca-99d29db05c62" RefPartnerSideB="7b556454-e105-48de-be58-f2822060eeb3" Name="InternalLink" />
       <RoleRequirements RefBaseRoleClassPath="Requirements/Process" />
       <RoleRequirements RefBaseRoleClassPath="Requirements/Security" />
       <RoleRequirements RefBaseRoleClassPath="Requirements/Safety" />
@@ -324,20 +324,13 @@
       <Attribute Name="Name" AttributeDataType="xs:string" />
       <Attribute Name="Probability" AttributeDataType="xs:string" />
       <ExternalInterface Name="ToHaz01" ID="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
-      <InternalLink RefPartnerSideA="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefPartnerSideB="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" Name="InternalLink" />
-      <InternalLink RefPartnerSideA="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefPartnerSideB="7b556454-e105-48de-be58-f2822060eeb3" Name="InternalLink" />
+      <InternalLink RefPartnerSideA="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefPartnerSideB="2d86c86c-72a9-4bc7-9dca-99d29db05c62" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Cybersecurity Hazards" ID="Haz02_Cyber" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+    <InternalElement Name="Physical Hazards" ID="Haz02_Physical" RefBaseSystemUnitPath="HazardforSystem/Hazard">
       <Attribute Name="Name" AttributeDataType="xs:string" />
       <Attribute Name="Probability" AttributeDataType="xs:string" />
-      <ExternalInterface Name="ToHaz02" ID="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
-      <InternalLink RefPartnerSideA="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" RefPartnerSideB="2d86c86c-72a9-4bc7-9dca-99d29db05c62" Name="InternalLink" />
-      <InternalLink RefPartnerSideA="e1689a99-4f83-4ed6-87ee-0b188d4fb7a0" RefPartnerSideB="7b556454-e105-48de-be58-f2822060eeb3" Name="InternalLink" />
-    </InternalElement>
-    <InternalElement Name="Physical Hazards" ID="Haz03_Physical" RefBaseSystemUnitPath="HazardforSystem/Hazard">
-      <Attribute Name="Name" AttributeDataType="xs:string" />
-      <Attribute Name="Probability" AttributeDataType="xs:string" />
-      <ExternalInterface Name="ToHaz03" ID="7b556454-e105-48de-be58-f2822060eeb3" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <ExternalInterface Name="ToHaz02" ID="7b556454-e105-48de-be58-f2822060eeb3" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="7b556454-e105-48de-be58-f2822060eeb3" RefPartnerSideB="eb997142-db18-4ef4-b338-d064afcf96e6" Name="InternalLink" />
     </InternalElement>
     <InternalElement Name="Centrifuge Failure" ID="Centrifuge_Failure" RefBaseSystemUnitPath="HazardforSystem/Hazard">
       <ExternalInterface Name="ToCompromise" ID="eb997142-db18-4ef4-b338-d064afcf96e6" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
