@@ -9,13 +9,19 @@ An adaptation of the approach as applied to a real-world example - the Stuxnet A
 This code was tested on Python 3.12.8. It analyses an AutomationML file to generate BBNs and compute probabilities of occurence (of CPS system termination) and of severity/impact. The code is adapted from the integrated safety and security risk assessment code developed by Bhosale, which can be referenced here: https://github.com/Pbhosale1991/AML-BBN-RA Changes were been made to the original code to improve its flow and clarity, user interface, and to fix bugs in the original code. A new function to identify shortest paths in the BBNs was also added.
 
 ## 2. AML_BBN_Stuxnet.py
-This code demonstrates how this risk assessment approach can be applied to a real-world example - the Stuxnet attack. The code  analyses the Stuxnet_AML.aml file to generate BBNs and compute a risk score.
+This code demonstrates how this risk assessment approach can be applied to a real-world example - the Stuxnet attack. The code analyses the Stuxnet.aml file to generate BBNs and compute a risk score.
 
-## 3. Generic_CPS.aml
+## 3. AML_BBN_BlackEnergy.py
+This code demonstrates how this risk assessment approach can be applied to a real-world example - the BlackEnergy attack. The code analyses the BlackEnergy.aml file to generate BBNs and compute a risk score.
+
+## 4. Generic_CPS.aml
 This is a markup file depicting a generic CPS based on the Automation Markup Language (AutomationML), edited using the AutomationML Editor. More information can be found here: https://www.automationml.org/
 
-## 4. Stuxnet.aml
+## 5. Stuxnet.aml
 This is a markup file depicting the Stuxnet attack scenario based on the Automation Markup Language (AutomationML), edited using the AutomationML Editor.
 
-## 5. Generic_CPS_BNN.xdsl
+## 6. BlackEnergy.aml
+This is a markup file depicting the BlackEnergy attack scenario based on the Automation Markup Language (AutomationML), edited using the AutomationML Editor.
+
+## 7. Generic_CPS_BNN.xdsl
 This is a representation of a generic CPS, edited using GeNIe Academic 5.0.
