@@ -3,7 +3,7 @@
 Risk Assessment for BlackEnergy Attack Scenario using Bayesian Belief Networks (BBN) based on AutomationML Models
 (Adapted from code by Pushparaj BHOSALE: https://github.com/Pbhosale1991/AML-BBN-RA)
 Author: Huang Shaofei
-Last update: 2025-02-27
+Last update: 2025-03-03
 Latest version at https://github.com/shaofeihuang/CPS-Risk_Assessment-BBN
 ############################################################################################################################
 '''
@@ -353,7 +353,7 @@ for element in total_elements:
 ############################################################################
 # Section 3: Bayesian Belief Network (BBN) Implementation Helper Functions #
 ############################################################################
-def generate_cpd_values_occur(num_states, num_parents, hazard_node=False, vulnerability_node=False, process_node=False):
+def generate_cpd_values_occurrence(num_states, num_parents, hazard_node=False, vulnerability_node=False, process_node=False):
     cpd_values = np.zeros((num_states, 2 ** num_parents))
 
     if hazard_node:
@@ -493,9 +493,9 @@ def select_start_end_nodes(total_elements):
 #########################################################################
 cpds = {}
 cpd_values_list = []
-nodes_and_numberofParents =[]
-path_length_betn_nodes=[]
-path_length_betn_nodes_final=[]
+nodes_and_numberofParents = []
+path_length_betn_nodes= []
+path_length_betn_nodes_final= []
 path_length_final_node = []
 
 bbn_occurrence = BayesianNetwork()
@@ -514,13 +514,13 @@ for node in bbn_occurrence.nodes():
 
     if matching_hazard_nodes:
         hazard_node = True
-        cpd_values = generate_cpd_values_occur(num_states, num_parents, hazard_node=True)
+        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, hazard_node=True)
     elif matching_vulnerability_nodes:
         vulnerability_node = True
-        cpd_values = generate_cpd_values_occur(num_states, num_parents, vulnerability_node=True)
+        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, vulnerability_node=True)
     elif matching_process_nodes:
         process_node = True
-        cpd_values = generate_cpd_values_occur(num_states, num_parents, process_node=True)
+        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, process_node=True)
 
     cpd = TabularCPD(variable=node, variable_card=num_states, values=cpd_values,
                      evidence=bbn_occurrence.get_parents(node), evidence_card=[2] * num_parents)
@@ -555,7 +555,7 @@ for node1, node2 in itertools.product(total_elements, repeat=2):
             path_length_betn_nodes.append({'Node1': node1, 'Node2': node2, 
                                'Number of hops': path_length, 
                                'Probability': 1/path_length})
-            if node2==last_node:
+            if node2 == last_node:
                 path_length_final_node.append((node1, last_node, path_length, 1/path_length))
 
 #########################################################################
@@ -569,7 +569,7 @@ bbn_impact = BayesianNetwork()
 bbn_impact.add_edges_from([(connection['from'], connection['to']) for connection in connections])
 cpds = {}
 cpd_values_list_impact = []
-nodes_and_numberofParents =[]
+nodes_and_numberofParents = []
 
 for node in bbn_impact.nodes():
     num_parents = len(bbn_occurrence.get_parents(node))
@@ -607,8 +607,8 @@ bbn_impact.add_cpds(*cpds.values())
 print("[*] Checking BBN (Occurrence) structure consistency:", bbn_occurrence.check_model())
 print("[*] Checking BBN (Impact) structure consistency:", bbn_impact.check_model())
 
-inference = VariableElimination(bbn_occurrence)
-inference2 = VariableElimination(bbn_impact)
+inference_occurrence = VariableElimination(bbn_occurrence)
+inference_impact = VariableElimination(bbn_impact)
 
 
 # Plot BBN visual
@@ -678,8 +678,8 @@ except nx.NodeNotFound as e:
 # Compute risk score
 risk_measurements = []
 for node in total_elements:
-    prob_node = inference.query(variables=[node])
-    impact_node = inference2.query(variables=[node])
+    prob_node = inference_occurrence.query(variables=[node])
+    impact_node = inference_impact.query(variables=[node])
     for element in path_length_final_node:
         if node == element[0]:
             cpd_prob = prob_node.values
@@ -696,7 +696,7 @@ for node in total_elements:
     if node == last_node:
         pass
     else:
-        prob_if_node_fail = inference.query(variables=[last_node], evidence={node:0})
+        prob_if_node_fail = inference_occurrence.query(variables=[last_node], evidence={node:0})
         #print (node, "\n", prob_if_node_fail)
         prob_if_node_fail_values = prob_if_node_fail.values
         min_value = min(prob_if_node_fail_values)
@@ -708,37 +708,12 @@ for node in total_elements:
 #print (node_prob_dict)
 sorted_node_prob = sorted(node_prob_dict.items(), key=lambda x: x[1], reverse=True)
 
-# Save results to Excel worksheet
-#workbook = openpyxl.Workbook()
-#worksheet = workbook.active
-#worksheet['A1'] = 'Node'
-#worksheet['B1'] = 'Probability'
-#red_fill = PatternFill(start_color="FF0000", end_color="FF0000", fill_type="solid")
-#yellow_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-#green_fill = PatternFill(start_color="00FF00", end_color="00FF00", fill_type="solid")
-
-#for index, (node, prob) in enumerate(sorted_node_prob, start=2):
-#    print("index:", index, "node:", node, "prob:", prob)
-#    cell_node = worksheet.cell(row=index, column=1)
-#    cell_node.value = node    
-#    cell_prob = worksheet.cell(row=index, column=2)
-#    cell_prob.value = prob
-    
-#    if prob > 0.8:
-#        cell_prob.fill = red_fill
-#    elif prob >= 0.5 and prob <= 0.8:
-#        cell_prob.fill = yellow_fill
-#    else:
-#        cell_prob.fill = green_fill
-#print ("\n")
-#workbook.save(filename='sorted_results.xlsx')
-
 # Print results to console
 for nodes in total_elements:
-    if nodes==last_node:
-        prob_failure=inference.query(variables=[nodes], evidence={source_node:1})
+    if nodes == last_node:
+        prob_failure = inference_occurrence.query(variables=[nodes], evidence={source_node:1})
         print("[*] CPT (Occurrence) of Disabled Electrical Supply:\n", prob_failure)
-        impact_failure=inference2.query(variables=[nodes], evidence={source_node:1})
+        impact_failure = inference_impact.query(variables=[nodes], evidence={source_node:1})
         print("[*] CPT (Impact) of Disabled Electrical Supply:\n", impact_failure)        
         cpd_prob = prob_failure.values
         cpd_impact = impact_failure.values

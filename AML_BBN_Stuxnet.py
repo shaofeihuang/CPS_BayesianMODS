@@ -492,9 +492,9 @@ def select_start_end_nodes(total_elements):
 #########################################################################
 cpds = {}
 cpd_values_list = []
-nodes_and_numberofParents =[]
-path_length_betn_nodes=[]
-path_length_betn_nodes_final=[]
+nodes_and_numberofParents = []
+path_length_betn_nodes= []
+path_length_betn_nodes_final= []
 path_length_final_node = []
 
 bbn_occurrence = BayesianNetwork()
@@ -554,7 +554,7 @@ for node1, node2 in itertools.product(total_elements, repeat=2):
             path_length_betn_nodes.append({'Node1': node1, 'Node2': node2, 
                                'Number of hops': path_length, 
                                'Probability': 1/path_length})
-            if node2==last_node:
+            if node2 == last_node:
                 path_length_final_node.append((node1, last_node, path_length, 1/path_length))
 
 ## ('Haz01_Human', 'Centrifuge_Failure', 3, 0.3333333333333333)
@@ -571,7 +571,7 @@ bbn_impact = BayesianNetwork()
 bbn_impact.add_edges_from([(connection['from'], connection['to']) for connection in connections])
 cpds = {}
 cpd_values_list_impact = []
-nodes_and_numberofParents =[]
+nodes_and_numberofParents = []
 
 for node in bbn_impact.nodes():
     num_parents = len(bbn_occurrence.get_parents(node))
@@ -609,8 +609,8 @@ bbn_impact.add_cpds(*cpds.values())
 print("[*] Checking BBN (Occurrence) structure consistency:", bbn_occurrence.check_model())
 print("[*] Checking BBN (Impact) structure consistency:", bbn_impact.check_model())
 
-inference = VariableElimination(bbn_occurrence)
-inference2 = VariableElimination(bbn_impact)
+inference_occurrence = VariableElimination(bbn_occurrence)
+inference_impact = VariableElimination(bbn_impact)
 
 
 # Plot BBN visual
@@ -625,7 +625,6 @@ plt.title("Bayesian Belief Network")
 plt.axis('off')
 #plt.savefig('bbn_plot_shell_layout.png', format='png', dpi=300, bbox_inches='tight')
 plt.show()
-
 
 
 # Shortest paths
@@ -680,8 +679,8 @@ except nx.NodeNotFound as e:
 # Compute risk score
 risk_measurements = []
 for node in total_elements:
-    prob_node = inference.query(variables=[node])
-    impact_node = inference2.query(variables=[node])
+    prob_node = inference_occurrence.query(variables=[node])
+    impact_node = inference_impact.query(variables=[node])
     for element in path_length_final_node:
         if node == element[0]:
             cpd_prob = prob_node.values
@@ -698,7 +697,7 @@ for node in total_elements:
     if node == last_node:
         pass
     else:
-        prob_if_node_fail = inference.query(variables=[last_node], evidence={node:0})
+        prob_if_node_fail = inference_occurrence.query(variables=[last_node], evidence={node:0})
         #print (node, "\n", prob_if_node_fail)
         prob_if_node_fail_values = prob_if_node_fail.values
         min_value = min(prob_if_node_fail_values)
@@ -737,10 +736,10 @@ sorted_node_prob = sorted(node_prob_dict.items(), key=lambda x: x[1], reverse=Tr
 
 # Print results to console
 for nodes in total_elements:
-    if nodes==last_node:
-        prob_failure=inference.query(variables=[nodes], evidence={source_node:1})
+    if nodes == last_node:
+        prob_failure = inference_occurrence.query(variables=[nodes], evidence={source_node:1})
         print("[*] CPT (Occurrence) of Centrifuge Failure:\n", prob_failure)
-        impact_failure=inference2.query(variables=[nodes], evidence={source_node:1})
+        impact_failure = inference_impact.query(variables=[nodes], evidence={source_node:1})
         print("[*] CPT (Impact) of Centrifuge Failure:\n", impact_failure)        
         cpd_prob = prob_failure.values
         cpd_impact = impact_failure.values
