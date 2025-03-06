@@ -3,7 +3,7 @@
 Risk Assessment for BlackEnergy Attack Scenario using Bayesian Belief Networks (BBN) based on AutomationML Models
 (Adapted from code by Pushparaj BHOSALE: https://github.com/Pbhosale1991/AML-BBN-RA)
 Author: Huang Shaofei
-Last update: 2025-03-03
+Last update: 2025-03-06
 Latest version at https://github.com/shaofeihuang/CPS-Risk_Assessment-BBN
 ############################################################################################################################
 '''
@@ -83,9 +83,6 @@ while True:
             print("[!] ERROR: Input a valid SA value between 0.01% and 10%.")
     except ValueError:
         print("Invalid input. Please enter a numeric value.")
-############################
-#     End of Section 1     #
-############################
 
 #############################################
 # Section 2: AML Model Attribute Extraction #
@@ -346,10 +343,6 @@ for element in total_elements:
     if num_children > max_num_children:
         max_num_children = num_children
 
-#############################################
-#             End of Section 2              #
-#############################################
-
 ############################################################################
 # Section 3: Bayesian Belief Network (BBN) Implementation Helper Functions #
 ############################################################################
@@ -484,10 +477,6 @@ def select_start_end_nodes(total_elements):
     end_node = random.choice(list(total_elements - {start_node}))  # Ensuring end_node is different from start_node
     return start_node, end_node
 
-############################################################################
-#                            End of Section 3                              #
-############################################################################
-
 #########################################################################
 # Section 4: Bayesian Belief Network (BBN) Implementation for Occurrence #
 #########################################################################
@@ -558,10 +547,6 @@ for node1, node2 in itertools.product(total_elements, repeat=2):
             if node2 == last_node:
                 path_length_final_node.append((node1, last_node, path_length, 1/path_length))
 
-#########################################################################
-#                          End of Section 4                             #
-#########################################################################
-
 ######################################################################
 # Section 5: Bayesian Belief Network (BBN) Implementation for Impact #
 ######################################################################
@@ -597,9 +582,6 @@ for node in bbn_impact.nodes():
     cpd_values_list.append((node, cpd_values.tolist(), cpd.variables, cpd.cardinality))
 
 bbn_impact.add_cpds(*cpds.values())
-######################################################################
-#                          End of Section 5                          #
-######################################################################
 
 #############################
 # Section 6: BBN Operations #
@@ -623,8 +605,6 @@ plt.title("Bayesian Belief Network")
 plt.axis('off')
 #plt.savefig('bbn_plot_shell_layout.png', format='png', dpi=300, bbox_inches='tight')
 plt.show()
-
-
 
 # Shortest paths
 print('[-] Bayesian Belief Network (BBN) Pathfinder')
