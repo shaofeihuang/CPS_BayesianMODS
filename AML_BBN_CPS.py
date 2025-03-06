@@ -352,7 +352,7 @@ for element in total_elements:
 ############################################################################
 # Section 3: Bayesian Belief Network (BBN) Implementation Helper Functions #
 ############################################################################
-def generate_cpd_values_occur(num_states, num_parents, hazard_node=False, vulnerability_node=False, process_node=False):
+def generate_cpd_values_occurrence(num_states, num_parents, hazard_node=False, vulnerability_node=False, process_node=False):
     cpd_values = np.zeros((num_states, 2 ** num_parents))
 
     if hazard_node:
@@ -426,7 +426,7 @@ def generate_cpd_values_impact_(num_states, num_parents, hazard_node=False, vuln
             cpd_values[1, 0] = 1 - cpd_values[0, 0]
             cpd_values[1, 1] = 1 - cpd_values[0, 1]    
         elif 2 <= num_parents <= max_num_parents:
-            cpd_values=generate_cpd_values_impact(num_parents)
+            cpd_values=generate_cpd_values_hazard(num_parents)
     
     elif vulnerability_node:
         probability_of_impact_for_node = matching_vulnerability_nodes[0]['Probability of Impact'] * ( 1 - matching_vulnerability_nodes[0]['Probability of Mitigation'])
@@ -513,13 +513,13 @@ for node in bbn_occurrence.nodes():
 
     if matching_hazard_nodes:
         hazard_node = True
-        cpd_values = generate_cpd_values_occur(num_states, num_parents, hazard_node=True)
+        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, hazard_node=True)
     elif matching_vulnerability_nodes:
         vulnerability_node = True
-        cpd_values = generate_cpd_values_occur(num_states, num_parents, vulnerability_node=True)
+        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, vulnerability_node=True)
     elif matching_process_nodes:
         process_node = True
-        cpd_values = generate_cpd_values_occur(num_states, num_parents, process_node=True)
+        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, process_node=True)
 
     cpd = TabularCPD(variable=node, variable_card=num_states, values=cpd_values,
                      evidence=bbn_occurrence.get_parents(node), evidence_card=[2] * num_parents)

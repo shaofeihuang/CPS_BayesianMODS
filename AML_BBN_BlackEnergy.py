@@ -427,7 +427,7 @@ def generate_cpd_values_impact_(num_states, num_parents, hazard_node=False, vuln
             cpd_values[1, 0] = 1 - cpd_values[0, 0]
             cpd_values[1, 1] = 1 - cpd_values[0, 1]    
         elif 2 <= num_parents <= max_num_parents:
-            cpd_values=generate_cpd_values_impact(num_parents)
+            cpd_values=generate_cpd_values_hazard(num_parents)
     
     elif vulnerability_node:
         probability_of_impact_for_node = matching_vulnerability_nodes[0]['Probability of Impact'] * ( 1 - matching_vulnerability_nodes[0]['Probability of Mitigation'])
