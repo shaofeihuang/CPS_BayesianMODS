@@ -3,7 +3,7 @@
 Risk Assessment for Generic Cyber-Physical Systems (CPS) using Bayesian Belief Networks (BBN) based on AutomationML Models
 (Adapted from code by Pushparaj BHOSALE: https://github.com/Pbhosale1991/AML-BBN-RA)
 Author: Huang Shaofei
-Last update: 2025-03-06
+Last update: 2025-03-18
 Latest version at https://github.com/shaofeihuang/CPS-Risk_Assessment-BBN
 ############################################################################################################################
 '''
@@ -32,9 +32,8 @@ AttributeTag=".//{http://www.dke.de/CAEX}Attribute"
 ValueTag=".//{http://www.dke.de/CAEX}Value"
 internalLinkTag=".//{http://www.dke.de/CAEX}InternalLink"
 
-if __name__ == "__main__":
-    amlFile = ET.parse('Generic_CPS.aml')
-    root = amlFile.getroot()
+amlFile = ET.parse('Generic_CPS.aml')
+root = amlFile.getroot()
 
 def get_valid_date():
     while True:
@@ -479,281 +478,238 @@ def select_start_end_nodes(total_elements):
 #########################################################################
 # Section 4: Bayesian Belief Network (BBN) Implementation for Occurrence #
 #########################################################################
-cpds = {}
-cpd_values_list = []
-nodes_and_numberofParents =[]
-path_length_betn_nodes=[]
-path_length_betn_nodes_final=[]
-path_length_final_node = []
+if __name__ == "__main__":
+    cpds = {}
+    cpd_values_list = []
+    nodes_and_numberofParents =[]
+    path_length_betn_nodes=[]
+    path_length_betn_nodes_final=[]
+    path_length_final_node = []
 
-bbn_occurrence = BayesianNetwork()
-connections = connections_mapped
-bbnNodes=bbn_occurrence.add_nodes_from(total_elements)
-bbn_occurrence.add_edges_from([(connection['from'], connection['to']) for connection in connections])
+    bbn_occurrence = BayesianNetwork()
+    connections = connections_mapped
+    bbnNodes=bbn_occurrence.add_nodes_from(total_elements)
+    bbn_occurrence.add_edges_from([(connection['from'], connection['to']) for connection in connections])
 
-for node in bbn_occurrence.nodes():
-    num_parents = len(bbn_occurrence.get_parents(node))
-    num_states = 2  # Assuming binary states for each node
-    matching_hazard_nodes = [element for element in HazardinSystem if element['ID'] == node]
-    matching_vulnerability_nodes = [element for element in VulnerabilityinSystem if element['ID'] == node]
-    matching_process_nodes = [element for element in probability_data if element['ID'] == node]
+    for node in bbn_occurrence.nodes():
+        num_parents = len(bbn_occurrence.get_parents(node))
+        num_states = 2  # Assuming binary states for each node
+        matching_hazard_nodes = [element for element in HazardinSystem if element['ID'] == node]
+        matching_vulnerability_nodes = [element for element in VulnerabilityinSystem if element['ID'] == node]
+        matching_process_nodes = [element for element in probability_data if element['ID'] == node]
 
-    cpd_values = None
+        cpd_values = None
 
-    if matching_hazard_nodes:
-        hazard_node = True
-        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, hazard_node=True)
-    elif matching_vulnerability_nodes:
-        vulnerability_node = True
-        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, vulnerability_node=True)
-    elif matching_process_nodes:
-        process_node = True
-        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, process_node=True)
+        if matching_hazard_nodes:
+            hazard_node = True
+            cpd_values = generate_cpd_values_occurrence(num_states, num_parents, hazard_node=True)
+        elif matching_vulnerability_nodes:
+            vulnerability_node = True
+            cpd_values = generate_cpd_values_occurrence(num_states, num_parents, vulnerability_node=True)
+        elif matching_process_nodes:
+            process_node = True
+            cpd_values = generate_cpd_values_occurrence(num_states, num_parents, process_node=True)
 
-    cpd = TabularCPD(variable=node, variable_card=num_states, values=cpd_values,
-                     evidence=bbn_occurrence.get_parents(node), evidence_card=[2] * num_parents)
+        cpd = TabularCPD(variable=node, variable_card=num_states, values=cpd_values,
+                        evidence=bbn_occurrence.get_parents(node), evidence_card=[2] * num_parents)
 
-    cpds[node] = cpd
-    cpd_values_list.append((node, cpd_values.tolist(), cpd.variables, cpd.cardinality))
-    
-bbn_occurrence.add_cpds(*cpds.values())
-bbn_graph = bbn_occurrence.to_markov_model()
+        cpds[node] = cpd
+        cpd_values_list.append((node, cpd_values.tolist(), cpd.variables, cpd.cardinality))
+        
+    bbn_occurrence.add_cpds(*cpds.values())
+    bbn_graph = bbn_occurrence.to_markov_model()
 
-last_node = None
-for element1 in HazardinSystem:
-    node1=element1['ID']
-    for element2 in result_list:
-        node2=element2['Element']
-        child_num = element2['Number of children']
+    last_node = None
+    for element1 in HazardinSystem:
+        node1=element1['ID']
+        for element2 in result_list:
+            node2=element2['Element']
+            child_num = element2['Number of children']
+            if node1 == node2:
+                if child_num == 0:
+                    last_node = node1
+
+    print("\n[*] Last node in BBN:", last_node)
+
+    for node1, node2 in itertools.product(total_elements, repeat=2):
         if node1 == node2:
-            if child_num == 0:
-                last_node = node1
-
-print("\n[*] Last node in BBN:", last_node)
-
-for node1, node2 in itertools.product(total_elements, repeat=2):
-    if node1 == node2:
-        path_length_betn_nodes.append((node1, node2, 0))
-    else:
-        path_length = shortest_path_length(bbn_graph, node1, node2)
-        if path_length == float('inf'):
-            path_length_betn_nodes.append((node1, node2, "No path"))
+            path_length_betn_nodes.append((node1, node2, 0))
         else:
-            path_length_betn_nodes_final.append((node1, node2, path_length, 1/path_length))
-            path_length_betn_nodes.append({'Node1': node1, 'Node2': node2, 
-                               'Number of hops': path_length, 
-                               'Probability': 1/path_length})
-            if node2==last_node:
-                path_length_final_node.append((node1, last_node, path_length, 1/path_length))
+            path_length = shortest_path_length(bbn_graph, node1, node2)
+            if path_length == float('inf'):
+                path_length_betn_nodes.append((node1, node2, "No path"))
+            else:
+                path_length_betn_nodes_final.append((node1, node2, path_length, 1/path_length))
+                path_length_betn_nodes.append({'Node1': node1, 'Node2': node2, 
+                                'Number of hops': path_length, 
+                                'Probability': 1/path_length})
+                if node2==last_node:
+                    path_length_final_node.append((node1, last_node, path_length, 1/path_length))
 
-######################################################################
-# Section 5: Bayesian Belief Network (BBN) Implementation for Impact #
-######################################################################
-bbn_impact=BayesianNetwork()
-bbn_impact.add_edges_from([(connection['from'], connection['to']) for connection in connections])
-cpds = {}
-cpd_values_list_impact = []
-nodes_and_numberofParents =[]
+    ######################################################################
+    # Section 5: Bayesian Belief Network (BBN) Implementation for Impact #
+    ######################################################################
+    bbn_impact=BayesianNetwork()
+    bbn_impact.add_edges_from([(connection['from'], connection['to']) for connection in connections])
+    cpds = {}
+    cpd_values_list_impact = []
+    nodes_and_numberofParents =[]
 
-for node in bbn_impact.nodes():
-    num_parents = len(bbn_occurrence.get_parents(node))
-    num_states = 2
-    cpd_values = None
+    for node in bbn_impact.nodes():
+        num_parents = len(bbn_occurrence.get_parents(node))
+        num_states = 2
+        cpd_values = None
 
-    matching_hazard_nodes = [element for element in HazardinSystem if element['ID'] == node]
-    matching_vulnerability_nodes = [element for element in VulnerabilityinSystem if element['ID'] == node]
-    matching_process_nodes = [element for element in probability_data if element['ID'] == node]
+        matching_hazard_nodes = [element for element in HazardinSystem if element['ID'] == node]
+        matching_vulnerability_nodes = [element for element in VulnerabilityinSystem if element['ID'] == node]
+        matching_process_nodes = [element for element in probability_data if element['ID'] == node]
 
-    if matching_hazard_nodes:
-        hazard_node = True
-        cpd_values = generate_cpd_values_impact_(num_states, num_parents, hazard_node=True)
-    elif matching_vulnerability_nodes:
-        vulnerability_node = True
-        cpd_values = generate_cpd_values_impact_(num_states, num_parents, vulnerability_node=True)
-    elif matching_process_nodes:
-        process_node = True
-        cpd_values = generate_cpd_values_impact_(num_states, num_parents, process_node=True)
+        if matching_hazard_nodes:
+            hazard_node = True
+            cpd_values = generate_cpd_values_impact_(num_states, num_parents, hazard_node=True)
+        elif matching_vulnerability_nodes:
+            vulnerability_node = True
+            cpd_values = generate_cpd_values_impact_(num_states, num_parents, vulnerability_node=True)
+        elif matching_process_nodes:
+            process_node = True
+            cpd_values = generate_cpd_values_impact_(num_states, num_parents, process_node=True)
 
-    cpd = TabularCPD(variable=node, variable_card=num_states, values=cpd_values,
-                     evidence=bbn_occurrence.get_parents(node), evidence_card=[2] * num_parents)
+        cpd = TabularCPD(variable=node, variable_card=num_states, values=cpd_values,
+                        evidence=bbn_occurrence.get_parents(node), evidence_card=[2] * num_parents)
 
-    cpds[node] = cpd
-    cpd_values_list.append((node, cpd_values.tolist(), cpd.variables, cpd.cardinality))
+        cpds[node] = cpd
+        cpd_values_list.append((node, cpd_values.tolist(), cpd.variables, cpd.cardinality))
 
-bbn_impact.add_cpds(*cpds.values())
+    bbn_impact.add_cpds(*cpds.values())
 
 #############################
 # Section 6: BBN Operations #
 #############################
-print("[*] Checking BBN (Occurrence) structure consistency:", bbn_occurrence.check_model())
-print("[*] Checking BBN (Impact) structure consistency:", bbn_impact.check_model())
+    print("[*] Checking BBN (Occurrence) structure consistency:", bbn_occurrence.check_model())
+    print("[*] Checking BBN (Impact) structure consistency:", bbn_impact.check_model())
 
-inference = VariableElimination(bbn_occurrence)
-inference2 = VariableElimination(bbn_impact)
+    inference = VariableElimination(bbn_occurrence)
+    inference2 = VariableElimination(bbn_impact)
 
-# Plot BBN visual
-graph = nx.DiGraph()
-graph.add_nodes_from(bbn_occurrence.nodes())
-graph.add_edges_from(bbn_occurrence.edges())
-pos = nx.kamada_kawai_layout(graph, scale=2)
-nx.draw_networkx_nodes(graph, pos, node_color='lightblue', node_size=300)
-nx.draw_networkx_edges(graph, pos, arrows=True, arrowstyle='->', arrowsize=10)
-nx.draw_networkx_labels(graph, pos)
-plt.title("Bayesian Belief Network")
-plt.axis('off')
-#plt.savefig('bbn_plot_shell_layout.png', format='png', dpi=300, bbox_inches='tight')
-plt.show()
+    # Plot BBN visual
+    graph = nx.DiGraph()
+    graph.add_nodes_from(bbn_occurrence.nodes())
+    graph.add_edges_from(bbn_occurrence.edges())
+    pos = nx.kamada_kawai_layout(graph, scale=2)
+    nx.draw_networkx_nodes(graph, pos, node_color='lightblue', node_size=300)
+    nx.draw_networkx_edges(graph, pos, arrows=True, arrowstyle='->', arrowsize=10)
+    nx.draw_networkx_labels(graph, pos)
+    plt.title("Bayesian Belief Network")
+    plt.axis('off')
+    #plt.savefig('bbn_plot_shell_layout.png', format='png', dpi=300, bbox_inches='tight')
+    plt.show()
 
-# Shortest paths
-print('[-] Bayesian Belief Network (BBN) Pathfinder')
-graph = nx.DiGraph(bbn_occurrence.edges)
+    # Shortest paths
+    print('[-] Bayesian Belief Network (BBN) Pathfinder')
+    graph = nx.DiGraph(bbn_occurrence.edges)
 
-valid_nodes = {"user", "v1", "v2", "v3", "v4", "v5", "v6"}
+    valid_nodes = {"user", "v1", "v2", "v3", "v4", "v5", "v6"}
 
-while True:
-    source_node_input = input("Enter source node (User, V1-V6) or leave blank for default (V2: Tampering): ").strip()
-    if not source_node_input:  # Default to "V2" if input is blank
-        source_node = "V2"
-        break
-    # Convert input to lowercase and check if it's valid
-    if source_node_input.lower() in valid_nodes:
-        source_node = source_node_input.upper()  # Convert to uppercase for consistency
-        if source_node == "USER":
-            source_node = "User"
-        break
-    else:
-        print("[!] Invalid input. Please enter a valid node (V1-V6).")
-
-target_node = "CPS_Termination"
-
-try:
-    all_paths = list(nx.all_simple_paths(graph, source=source_node, target=target_node))
-    if not all_paths:
-        print(f"[!] No paths exist between {source_node} and {target_node}.")
-    else:
-        # Sort paths by length
-        sorted_paths = sorted(all_paths, key=len)
-
-        # Determine shortest length
-        shortest_length = len(sorted_paths[0])
-
-        choice = input("[+] Enter any key to view all BBN paths or leave blank for default (display shortest path(s) only): ")
-        if not choice:
-            shortest_paths = [path for path in sorted_paths if len(path) == shortest_length]
-            print(f"[*] Shortest path(s) from {source_node} to {target_node}:")
-            for i, path in enumerate(shortest_paths, 1):
-                print(f"  {i}: {path}")
+    while True:
+        source_node_input = input("Enter source node (User, V1-V6) or leave blank for default (V2: Tampering): ").strip()
+        if not source_node_input:  # Default to "V2" if input is blank
+            source_node = "V2"
+            break
+        # Convert input to lowercase and check if it's valid
+        if source_node_input.lower() in valid_nodes:
+            source_node = source_node_input.upper()  # Convert to uppercase for consistency
+            if source_node == "USER":
+                source_node = "User"
+            break
         else:
-            print(f"[*] All paths from {source_node} to {target_node}, sorted by length:")
-            for i, path in enumerate(sorted_paths, 1):
-                print(f"  {i}: {path}")
+            print("[!] Invalid input. Please enter a valid node (V1-V6).")
 
-except nx.NetworkXNoPath:
-    print(f"[!] No path exists between {source_node} and {target_node}.")
-except nx.NodeNotFound as e:
-    print(f"[!] Error: {e}")
+    target_node = "CPS_Termination"
 
-# Compute risk score
-risk_measurements = []
-for node in total_elements:
-    prob_node = inference.query(variables=[node])
-    impact_node = inference2.query(variables=[node])
-    for element in path_length_final_node:
-        if node == element[0]:
-            cpd_prob = prob_node.values
-            cpd_imp = element[3]
-            cpd_impact = impact_node.values        
-            risk_v1=cpd_prob[0] * cpd_imp       # Risk computed as probability of occurrence multiplied by 1/path_length (from node to end)
-            risk_v2=cpd_prob[0] * cpd_impact[0] # Risk computed as probability of occurrence multiplied by probability of impact
-            #print(node, "P_Occurrence:", cpd_prob[0], "P_Path:", cpd_imp, "P_Impact:", cpd_impact[0], "Risk V1:", risk_v1, "Risk V2:", risk_v2)
-            risk_measurements.append([node, cpd_prob[0], cpd_imp, cpd_impact[0], risk_v1, risk_v2])
-
-# Sort nodes according to posterior prob
-node_prob_dict = {}
-for node in total_elements:
-    if node == last_node:
-        pass
-    else:
-        prob_if_node_fail = inference.query(variables=[last_node], evidence={node:0})
-        #print (node, "\n", prob_if_node_fail)
-        prob_if_node_fail_values = prob_if_node_fail.values
-        min_value = min(prob_if_node_fail_values)
-        max_value = max(prob_if_node_fail_values)
-        min_value = round(min_value, 2) - 0.01  # Restrict minimum value to 2 decimal places
-        max_value = round(max_value, 2) + 0.01  # Restrict maximum value to 2 decimal places and add 0.01
-        normal_prob_if_node_fail = (prob_if_node_fail_values[0] - min_value) / (max_value - min_value)
-        node_prob_dict[node] = normal_prob_if_node_fail
-#print (node_prob_dict)
-sorted_node_prob = sorted(node_prob_dict.items(), key=lambda x: x[1], reverse=True)
-
-# Save results to Excel worksheet
-#workbook = openpyxl.Workbook()
-#worksheet = workbook.active
-#worksheet['A1'] = 'Node'
-#worksheet['B1'] = 'Probability'
-#red_fill = PatternFill(start_color="FF0000", end_color="FF0000", fill_type="solid")
-#yellow_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-#green_fill = PatternFill(start_color="00FF00", end_color="00FF00", fill_type="solid")
-
-#for index, (node, prob) in enumerate(sorted_node_prob, start=2):
-#    print("index:", index, "node:", node, "prob:", prob)
-#    cell_node = worksheet.cell(row=index, column=1)
-#    cell_node.value = node    
-#    cell_prob = worksheet.cell(row=index, column=2)
-#    cell_prob.value = prob
-    
-#    if prob > 0.8:
-#        cell_prob.fill = red_fill
-#    elif prob >= 0.5 and prob <= 0.8:
-#        cell_prob.fill = yellow_fill
-#    else:
-#        cell_prob.fill = green_fill
-#print ("\n")
-#workbook.save(filename='sorted_results.xlsx')
-
-# Print results to console
-for nodes in total_elements:
-    if nodes==last_node:
-        prob_termination=inference.query(variables=[nodes], evidence={source_node:0})
-        print("\n")
-        print("[*] CPT (Occurrence) of CPS System Termination:\n", prob_termination)
-        impact_termination=inference2.query(variables=[nodes], evidence={source_node:0})
-        print("[*] CPT (Impact) of CPS System Termination:\n", impact_termination)        
-        cpd_prob = prob_termination.values
-        cpd_impact = impact_termination.values
-        print('--------------------------------------------------------')
-        print("[*] Posterior probability of occurrence:", cpd_prob[0])
-        print("[*] Posterior probability of impact:", cpd_impact[0])
-        risk_score = cpd_prob[0] * cpd_impact[0]
-        print('[*] Risk score: {:.2f} %'.format(risk_score * 100))
-        print('--------------------------------------------------------')
-        if risk_score < 0.2:
-            print('[----] CPS System is under NEGLIGIBLE risk (less than 20%)')
-        elif 0.2 <= risk_score < 0.4:
-            print('[*---] CPS System is under LOW risk (between 20% and 40%)')
-        elif 0.4 <= risk_score < 0.6:
-            print('[**--] CPS System is under MEDIUM risk (between 40% and 60%)')
-        elif 0.6 <= risk_score < 0.8:
-            print('[***-] CPS System is under HIGH risk (between 60% and 80%)')
+    try:
+        all_paths = list(nx.all_simple_paths(graph, source=source_node, target=target_node))
+        if not all_paths:
+            print(f"[!] No paths exist between {source_node} and {target_node}.")
         else:
-            print('[****] CPS System is under CRITICAL risk (greater than 80%)')
-    else:
-        pass
-'''
-        #print("Raw Risk Value:", risk_prob)
-        normal_risk = (risk_prob) / (0.0674)
-        print('[*] Normalised risk score: {:.2f} %'.format(normal_risk * 100))
-        print('--------------------------------------------------------')
-        if normal_risk<0.2:
-            print('[----] CPS System is under NEGLIGIBLE risk (less than 20%)')
-        elif 0.2<=normal_risk<0.4:
-            print('[*---] CPS System is under LOW risk (between 20% and 40%)')
-        elif 0.4<=normal_risk<0.6:
-            print('[**--] CPS System is under MEDIUM risk (between 40% and 60%)')
-        elif 0.6<=normal_risk<0.8:
-            print('[***-] CPS System is under HIGH risk (between 60% and 80%)')
+            # Sort paths by length
+            sorted_paths = sorted(all_paths, key=len)
+
+            # Determine shortest length
+            shortest_length = len(sorted_paths[0])
+
+            choice = input("[+] Enter any key to view all BBN paths or leave blank for default (display shortest path(s) only): ")
+            if not choice:
+                shortest_paths = [path for path in sorted_paths if len(path) == shortest_length]
+                print(f"[*] Shortest path(s) from {source_node} to {target_node}:")
+                for i, path in enumerate(shortest_paths, 1):
+                    print(f"  {i}: {path}")
+            else:
+                print(f"[*] All paths from {source_node} to {target_node}, sorted by length:")
+                for i, path in enumerate(sorted_paths, 1):
+                    print(f"  {i}: {path}")
+
+    except nx.NetworkXNoPath:
+        print(f"[!] No path exists between {source_node} and {target_node}.")
+    except nx.NodeNotFound as e:
+        print(f"[!] Error: {e}")
+
+    # Compute risk score
+    risk_measurements = []
+    for node in total_elements:
+        prob_node = inference.query(variables=[node])
+        impact_node = inference2.query(variables=[node])
+        for element in path_length_final_node:
+            if node == element[0]:
+                cpd_prob = prob_node.values
+                cpd_imp = element[3]
+                cpd_impact = impact_node.values        
+                risk_v1=cpd_prob[0] * cpd_imp       # Risk computed as probability of occurrence multiplied by 1/path_length (from node to end)
+                risk_v2=cpd_prob[0] * cpd_impact[0] # Risk computed as probability of occurrence multiplied by probability of impact
+                #print(node, "P_Occurrence:", cpd_prob[0], "P_Path:", cpd_imp, "P_Impact:", cpd_impact[0], "Risk V1:", risk_v1, "Risk V2:", risk_v2)
+                risk_measurements.append([node, cpd_prob[0], cpd_imp, cpd_impact[0], risk_v1, risk_v2])
+
+    # Sort nodes according to posterior prob
+    node_prob_dict = {}
+    for node in total_elements:
+        if node == last_node:
+            pass
         else:
-            print('[****] CPS System is under CRITICAL risk (greater than 80%)')
-    else:
-        pass
-'''
+            prob_if_node_fail = inference.query(variables=[last_node], evidence={node:0})
+            #print (node, "\n", prob_if_node_fail)
+            prob_if_node_fail_values = prob_if_node_fail.values
+            min_value = min(prob_if_node_fail_values)
+            max_value = max(prob_if_node_fail_values)
+            min_value = round(min_value, 2) - 0.01  # Restrict minimum value to 2 decimal places
+            max_value = round(max_value, 2) + 0.01  # Restrict maximum value to 2 decimal places and add 0.01
+            normal_prob_if_node_fail = (prob_if_node_fail_values[0] - min_value) / (max_value - min_value)
+            node_prob_dict[node] = normal_prob_if_node_fail
+    #print (node_prob_dict)
+    sorted_node_prob = sorted(node_prob_dict.items(), key=lambda x: x[1], reverse=True)
+
+    for nodes in total_elements:
+        if nodes==last_node:
+            prob_termination=inference.query(variables=[nodes], evidence={source_node:0})
+            print("\n")
+            print("[*] CPT (Occurrence) of CPS System Termination:\n", prob_termination)
+            impact_termination=inference2.query(variables=[nodes], evidence={source_node:0})
+            print("[*] CPT (Impact) of CPS System Termination:\n", impact_termination)        
+            cpd_prob = prob_termination.values
+            cpd_impact = impact_termination.values
+            print('--------------------------------------------------------')
+            print("[*] Posterior probability of occurrence:", cpd_prob[0])
+            print("[*] Posterior probability of impact:", cpd_impact[0])
+            risk_score = cpd_prob[0] * cpd_impact[0]
+            print('[*] Risk score: {:.2f} %'.format(risk_score * 100))
+            print('--------------------------------------------------------')
+            if risk_score < 0.2:
+                print('[----] CPS System is under NEGLIGIBLE risk (less than 20%)')
+            elif 0.2 <= risk_score < 0.4:
+                print('[*---] CPS System is under LOW risk (between 20% and 40%)')
+            elif 0.4 <= risk_score < 0.6:
+                print('[**--] CPS System is under MEDIUM risk (between 40% and 60%)')
+            elif 0.6 <= risk_score < 0.8:
+                print('[***-] CPS System is under HIGH risk (between 60% and 80%)')
+            else:
+                print('[****] CPS System is under CRITICAL risk (greater than 80%)')
+        else:
+            pass

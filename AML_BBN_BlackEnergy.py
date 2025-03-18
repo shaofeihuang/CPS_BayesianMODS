@@ -3,7 +3,7 @@
 Risk Assessment for BlackEnergy Attack Scenario using Bayesian Belief Networks (BBN) based on AutomationML Models
 (Adapted from code by Pushparaj BHOSALE: https://github.com/Pbhosale1991/AML-BBN-RA)
 Author: Huang Shaofei
-Last update: 2025-03-06
+Last update: 2025-03-18
 Latest version at https://github.com/shaofeihuang/CPS-Risk_Assessment-BBN
 ############################################################################################################################
 '''
@@ -32,9 +32,8 @@ AttributeTag=".//{http://www.dke.de/CAEX}Attribute"
 ValueTag=".//{http://www.dke.de/CAEX}Value"
 internalLinkTag=".//{http://www.dke.de/CAEX}InternalLink"
 
-if __name__ == "__main__":
-    amlFile = ET.parse('BlackEnergy.aml')
-    root = amlFile.getroot()
+amlFile = ET.parse('BlackEnergy.aml')
+root = amlFile.getroot()
 
 def get_valid_date():
     while True:
@@ -480,72 +479,73 @@ def select_start_end_nodes(total_elements):
 #########################################################################
 # Section 4: Bayesian Belief Network (BBN) Implementation for Occurrence #
 #########################################################################
-cpds = {}
-cpd_values_list = []
-nodes_and_numberofParents = []
-path_length_betn_nodes= []
-path_length_betn_nodes_final= []
-path_length_final_node = []
+if __name__ == "__main__":
+    cpds = {}
+    cpd_values_list = []
+    nodes_and_numberofParents = []
+    path_length_betn_nodes= []
+    path_length_betn_nodes_final= []
+    path_length_final_node = []
 
-bbn_occurrence = BayesianNetwork()
-connections = connections_mapped
-bbnNodes=bbn_occurrence.add_nodes_from(total_elements)
-bbn_occurrence.add_edges_from([(connection['from'], connection['to']) for connection in connections])
+    bbn_occurrence = BayesianNetwork()
+    connections = connections_mapped
+    bbnNodes=bbn_occurrence.add_nodes_from(total_elements)
+    bbn_occurrence.add_edges_from([(connection['from'], connection['to']) for connection in connections])
 
-for node in bbn_occurrence.nodes():
-    num_parents = len(bbn_occurrence.get_parents(node))
-    num_states = 2  # Assuming binary states for each node
-    matching_hazard_nodes = [element for element in HazardinSystem if element['ID'] == node]
-    matching_vulnerability_nodes = [element for element in VulnerabilityinSystem if element['ID'] == node]
-    matching_process_nodes = [element for element in probability_data if element['ID'] == node]
+    for node in bbn_occurrence.nodes():
+        num_parents = len(bbn_occurrence.get_parents(node))
+        num_states = 2  # Assuming binary states for each node
+        matching_hazard_nodes = [element for element in HazardinSystem if element['ID'] == node]
+        matching_vulnerability_nodes = [element for element in VulnerabilityinSystem if element['ID'] == node]
+        matching_process_nodes = [element for element in probability_data if element['ID'] == node]
 
-    cpd_values = None
+        cpd_values = None
 
-    if matching_hazard_nodes:
-        hazard_node = True
-        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, hazard_node=True)
-    elif matching_vulnerability_nodes:
-        vulnerability_node = True
-        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, vulnerability_node=True)
-    elif matching_process_nodes:
-        process_node = True
-        cpd_values = generate_cpd_values_occurrence(num_states, num_parents, process_node=True)
+        if matching_hazard_nodes:
+            hazard_node = True
+            cpd_values = generate_cpd_values_occurrence(num_states, num_parents, hazard_node=True)
+        elif matching_vulnerability_nodes:
+            vulnerability_node = True
+            cpd_values = generate_cpd_values_occurrence(num_states, num_parents, vulnerability_node=True)
+        elif matching_process_nodes:
+            process_node = True
+            cpd_values = generate_cpd_values_occurrence(num_states, num_parents, process_node=True)
 
-    cpd = TabularCPD(variable=node, variable_card=num_states, values=cpd_values,
-                     evidence=bbn_occurrence.get_parents(node), evidence_card=[2] * num_parents)
+        cpd = TabularCPD(variable=node, variable_card=num_states, values=cpd_values,
+                        evidence=bbn_occurrence.get_parents(node), evidence_card=[2] * num_parents)
 
-    cpds[node] = cpd
-    cpd_values_list.append((node, cpd_values.tolist(), cpd.variables, cpd.cardinality))
-    
-bbn_occurrence.add_cpds(*cpds.values())
-bbn_graph = bbn_occurrence.to_markov_model()
+        cpds[node] = cpd
+        cpd_values_list.append((node, cpd_values.tolist(), cpd.variables, cpd.cardinality))
+        
+    bbn_occurrence.add_cpds(*cpds.values())
+    bbn_graph = bbn_occurrence.to_markov_model()
 
-last_node = None
-for element1 in HazardinSystem:
-    node1=element1['ID']
-    for element2 in result_list:
-        node2=element2['Element']
-        child_num = element2['Number of children']
+    last_node = None
+    for element1 in HazardinSystem:
+        node1=element1['ID']
+        for element2 in result_list:
+            node2=element2['Element']
+            child_num = element2['Number of children']
+            if node1 == node2:
+                if child_num == 0:
+                    last_node = node1
+
+    print("\n[*] Last node in BBN:", last_node)
+
+    for node1, node2 in itertools.product(total_elements, repeat=2):
         if node1 == node2:
-            if child_num == 0:
-                last_node = node1
-
-print("\n[*] Last node in BBN:", last_node)
-
-for node1, node2 in itertools.product(total_elements, repeat=2):
-    if node1 == node2:
-        path_length_betn_nodes.append((node1, node2, 0))
-    else:
-        path_length = shortest_path_length(bbn_graph, node1, node2)
-        if path_length == float('inf'):
-            path_length_betn_nodes.append((node1, node2, "No path"))
+            path_length_betn_nodes.append((node1, node2, 0))
         else:
-            path_length_betn_nodes_final.append((node1, node2, path_length, 1/path_length))
-            path_length_betn_nodes.append({'Node1': node1, 'Node2': node2, 
-                               'Number of hops': path_length, 
-                               'Probability': 1/path_length})
-            if node2 == last_node:
-                path_length_final_node.append((node1, last_node, path_length, 1/path_length))
+            path_length = shortest_path_length(bbn_graph, node1, node2)
+            if path_length == float('inf'):
+                path_length_betn_nodes.append((node1, node2, "No path"))
+            else:
+                path_length_betn_nodes_final.append((node1, node2, path_length, 1/path_length))
+                path_length_betn_nodes.append({'Node1': node1, 'Node2': node2, 
+                                'Number of hops': path_length, 
+                                'Probability': 1/path_length})
+                if node2 == last_node:
+                    path_length_final_node.append((node1, last_node, path_length, 1/path_length))
 
 ######################################################################
 # Section 5: Bayesian Belief Network (BBN) Implementation for Impact #
