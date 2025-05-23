@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CAEXFile SchemaVersion="3.0" FileName="BlackEnergy.aml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dke.de/CAEX" xsi:schemaLocation="http://www.dke.de/CAEX CAEX_ClassModel_V.3.0.xsd">
-  <SuperiorStandardVersion>AutomationML 2.10</SuperiorStandardVersion>
-  <SourceDocumentInformation OriginName="" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginVersion="6.4.0.22" LastWritingDateTime="2025-02-27T11:32:48.7253208+08:00" OriginProjectID="DataSource" OriginProjectTitle="AML representation of BlackEnergy scenario" OriginRelease="6.4.0.22" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" />
   <InstanceHierarchy Name="BlackEnergy Example">
     <Version>0</Version>
     <InternalElement Name="ICS Workstation" ID="ICS_Workstation" RefBaseSystemUnitPath="AssetOfICS/Hardware/Process device/Workstation">
@@ -11,10 +9,6 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-          <Revision>
-            <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
-            <AuthorName></AuthorName>
-          </Revision>
           <Value>1.48254E-05</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string" />
@@ -34,10 +28,6 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-          <Revision>
-            <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
-            <AuthorName></AuthorName>
-          </Revision>
           <Value>1.48254E-05</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string" />
@@ -399,10 +389,6 @@
       <Attribute Name="Product" AttributeDataType="xs:string" />
       <Attribute Name="Version" AttributeDataType="xs:string" />
       <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-        <Revision>
-          <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
-          <AuthorName></AuthorName>
-        </Revision>
       </Attribute>
       <Attribute Name="Date of first use" AttributeDataType="xs:string" />
     </AttributeType>

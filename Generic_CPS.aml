@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CAEXFile SchemaVersion="3.0" FileName="Generic_CPS.aml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dke.de/CAEX" xsi:schemaLocation="http://www.dke.de/CAEX CAEX_ClassModel_V.3.0.xsd">
-  <SuperiorStandardVersion>AutomationML 2.10</SuperiorStandardVersion>
-  <SourceDocumentInformation OriginName="" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginVersion="6.2.7.0" LastWritingDateTime="2025-01-20T12:55:08.2865175+08:00" OriginProjectID="DataSource" OriginProjectTitle="AML representation of a generic Cyber-Physical System" OriginRelease="6.2.7.0" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" />
   <InstanceHierarchy Name="Generic CPS">
     <Version>0</Version>
     <InternalElement Name="Cyber System" ID="CyberSystem" RefBaseSystemUnitPath="AssetOfICS/Hardware/Process device/Workstation">
@@ -11,10 +9,6 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-          <Revision>
-            <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
-            <AuthorName></AuthorName>
-          </Revision>
           <Value>1.48254E-05</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string" />
@@ -35,10 +29,6 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-          <Revision>
-            <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
-            <AuthorName></AuthorName>
-          </Revision>
           <Value>1E-07</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string">
@@ -82,10 +72,6 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:string">
-          <Revision>
-            <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
-            <AuthorName></AuthorName>
-          </Revision>
           <Value>0.00000016</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:date">
@@ -110,10 +96,6 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-          <Revision>
-            <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
-            <AuthorName></AuthorName>
-          </Revision>
           <Value>1.76E-06</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string">
@@ -139,10 +121,6 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:string">
-          <Revision>
-            <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
-            <AuthorName></AuthorName>
-          </Revision>
           <Value>0.0000004566</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:date">
@@ -469,10 +447,6 @@
       <Attribute Name="Product" AttributeDataType="xs:string" />
       <Attribute Name="Version" AttributeDataType="xs:string" />
       <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-        <Revision>
-          <RevisionDate>2023-05-30T13:39:23.3905358+02:00</RevisionDate>
-          <AuthorName></AuthorName>
-        </Revision>
       </Attribute>
       <Attribute Name="Date of first use" AttributeDataType="xs:string" />
     </AttributeType>
