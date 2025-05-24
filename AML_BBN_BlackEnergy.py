@@ -610,10 +610,10 @@ plt.show()
 print('[-] Bayesian Belief Network (BBN) Pathfinder')
 graph = nx.DiGraph(bbn_occurrence.edges)
 
-valid_nodes = {"user", "v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10"}
+valid_nodes = {"user", "v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11"}
 
 while True:
-    source_node_input = input("Enter source node (User, V0-V10) or leave blank for default (User)): ").strip()
+    source_node_input = input("Enter source node (User, V1-V11) or leave blank for default (User)): ").strip()
     if not source_node_input:  # Default to "User" if input is blank
         source_node = "User"
         break
@@ -624,9 +624,9 @@ while True:
             source_node = "User"
         break
     else:
-        print("[!] Invalid input. Please enter a valid node (V0-V6).")
+        print("[!] Invalid input. Please enter a valid node (V1-V11).")
 
-target_node = "Haz05_Disable_Electrical_Supply"
+target_node = "H5_Disable_Electrical_Supply"
 
 try:
     all_paths = list(nx.all_simple_paths(graph, source=source_node, target=target_node))

@@ -21,6 +21,7 @@
       <RoleRequirements RefBaseRoleClassPath="Requirements/Security" />
       <RoleRequirements RefBaseRoleClassPath="Requirements/Process" />
     </InternalElement>
+    
     <InternalElement Name="IT Workstation" ID="IT_Workstation" RefBaseSystemUnitPath="AssetOfICS/Hardware/Process device/Workstation">
       <Attribute Name="AutomationEquipments" AttributeDataType="xs:string" RefAttributeType="AttributeTypeLib/AutomationEquipments">
         <Attribute Name="Vendor" AttributeDataType="xs:string" />
@@ -39,6 +40,7 @@
       <RoleRequirements RefBaseRoleClassPath="Requirements/Security" />
       <RoleRequirements RefBaseRoleClassPath="Requirements/Process" />
     </InternalElement>
+
     <InternalElement Name="User" ID="User" RefBaseSystemUnitPath="AssetOfICS/User">
       <Attribute Name="HumanErrorEstimationPercentage" AttributeDataType="xs:string">
         <Value>5</Value>
@@ -51,42 +53,48 @@
       <RoleRequirements RefBaseRoleClassPath="Requirements/Security" />
     </InternalElement>
   </InstanceHierarchy>
+
   <InstanceHierarchy Name="Hazards">
     <Version>0</Version>
-    <InternalElement Name="Fall prey to spear-phishing attack" ID="Haz01_Spearphishing" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+    <InternalElement Name="(H1) Fall prey to spear-phishing attack" ID="H1_Spearphishing" RefBaseSystemUnitPath="HazardforSystem/Hazard">
       <Attribute Name="Name" AttributeDataType="xs:string" />
       <Attribute Name="Probability" AttributeDataType="xs:string" />
       <ExternalInterface Name="ToHaz01" ID="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
       <InternalLink RefPartnerSideA="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefPartnerSideB="47e39df6-9af5-4522-b445-9e17a83f2d83" Name="InternalLink" />
       <InternalLink RefPartnerSideA="26dc9b7a-8ef2-40c3-bd8d-1de83035f170" RefPartnerSideB="65b98fc9-22ea-4b35-9ad5-a04984dea1f7" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Disable backup power supply" ID="Haz02_Disable_Backup_PS" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+
+    <InternalElement Name="(H2) Disable backup power supply" ID="H2_Disable_Backup_PS" RefBaseSystemUnitPath="HazardforSystem/Hazard">
       <Attribute Name="Name" AttributeDataType="xs:string" />
       <Attribute Name="Probability" AttributeDataType="xs:string" />
       <ExternalInterface Name="ToHaz02" ID="7b556454-e105-48de-be58-f2822060eeb3" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
       <InternalLink RefPartnerSideA="7b556454-e105-48de-be58-f2822060eeb3" RefPartnerSideB="17a0a47e-1a0e-4789-9310-3e7631f96417" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="DoS telephone lines" ID="Haz03_DoS_Telephone_Lines" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+    
+    <InternalElement Name="(H3) DoS telephone lines" ID="H3_DoS_Telephone_Lines" RefBaseSystemUnitPath="HazardforSystem/Hazard">
       <ExternalInterface Name="ToHaz03" ID="eb997142-db18-4ef4-b338-d064afcf96e6" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
       <InternalLink RefPartnerSideA="eb997142-db18-4ef4-b338-d064afcf96e6" RefPartnerSideB="17a0a47e-1a0e-4789-9310-3e7631f96417" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Disrupt OT" ID="Haz04_Disrupt_OT" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+
+    <InternalElement Name="(H4) Disrupt OT" ID="H4_Disrupt_OT" RefBaseSystemUnitPath="HazardforSystem/Hazard">
       <ExternalInterface Name="ToHaz04" ID="17a0a47e-1a0e-4789-9310-3e7631f96417" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
       <InternalLink RefPartnerSideA="17a0a47e-1a0e-4789-9310-3e7631f96417" RefPartnerSideB="95105044-cb13-409a-b8f9-b1660b1b3c7f" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Disable electrical supply" ID="Haz05_Disable_Electrical_Supply" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+    
+    <InternalElement Name="(H5) Disable electrical supply" ID="H5_Disable_Electrical_Supply" RefBaseSystemUnitPath="HazardforSystem/Hazard">
       <ExternalInterface Name="ToHaz05" ID="95105044-cb13-409a-b8f9-b1660b1b3c7f" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
     </InternalElement>
   </InstanceHierarchy>
+
   <InstanceHierarchy Name="Vulnerabilities">
     <Version>0</Version>
-    <InternalElement Name="Powerpoint 0-Day" ID="V0" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+    <InternalElement Name="(V1) Powerpoint 0-Day" ID="V1" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
       <Attribute Name="CVE" AttributeDataType="xs:string">
         <Value>CVE-2014-4114</Value>
       </Attribute>
       <Attribute Name="CVSS" AttributeDataType="xs:string" ID="34643025-7ad6-4dc0-a9aa-833394f9f835" />
       <Attribute Name="Attack Name" AttributeDataType="xs:string">
-        <Value>V0</Value>
+        <Value>V1</Value>
       </Attribute>
       <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
         <Value>0.9148</Value>
@@ -97,16 +105,17 @@
       <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
         <Value>0.2232</Value>
       </Attribute>
-      <ExternalInterface Name="ToV0" ID="47e39df6-9af5-4522-b445-9e17a83f2d83" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <ExternalInterface Name="ToV1" ID="47e39df6-9af5-4522-b445-9e17a83f2d83" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
       <InternalLink RefPartnerSideA="47e39df6-9af5-4522-b445-9e17a83f2d83" RefPartnerSideB="de6258a7-8d39-4711-8414-f866f4999249" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="MS-Word 0-Day" ID="V1" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+
+    <InternalElement Name="(V2) MS-Word 0-Day" ID="V2" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
       <Attribute Name="CVE" AttributeDataType="xs:string">
         <Value>CVE-2014-1761</Value>
       </Attribute>
       <Attribute Name="CVSS" AttributeDataType="xs:string" ID="48e8cafe-2b1d-486c-9fc0-9c919f38c1d4" />
       <Attribute Name="Attack Name" AttributeDataType="xs:string">
-        <Description>V1</Description>
+        <Description>V2</Description>
       </Attribute>
       <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
         <Value>0.9148</Value>
@@ -117,32 +126,15 @@
       <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
         <Value>0.2232</Value>
       </Attribute>
-      <ExternalInterface Name="ToV1" ID="65b98fc9-22ea-4b35-9ad5-a04984dea1f7" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <ExternalInterface Name="ToV2" ID="65b98fc9-22ea-4b35-9ad5-a04984dea1f7" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
       <InternalLink RefPartnerSideA="65b98fc9-22ea-4b35-9ad5-a04984dea1f7" RefPartnerSideB="de6258a7-8d39-4711-8414-f866f4999249" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Malware downloader" ID="V2" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+
+    <InternalElement Name="(V3) Malware downloader" ID="V3" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
       <Attribute Name="CVE" AttributeDataType="xs:string" />
       <Attribute Name="CVSS" AttributeDataType="xs:string" ID="1a81ab76-c5c6-46b6-bba5-50b85fdecdf5">
         <Value>CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</Value>
       </Attribute>
-      <Attribute Name="Attack Name" AttributeDataType="xs:string">
-        <Value>V2</Value>
-      </Attribute>
-      <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
-        <Value>0.9148</Value>
-      </Attribute>
-      <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
-        <Value>1</Value>
-      </Attribute>
-      <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
-        <Value>0.3060</Value>
-      </Attribute>
-      <ExternalInterface Name="ToV2" ID="859f5926-248e-43b7-88b5-184f7d4ed9c7" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <InternalLink RefPartnerSideA="859f5926-248e-43b7-88b5-184f7d4ed9c7" RefPartnerSideB="d1e0f082-13e8-4ce8-9751-5e935992261c" Name="InternalLink" />
-    </InternalElement>
-    <InternalElement Name="Masquerading (driver)" ID="V3" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
-      <Attribute Name="CVE" AttributeDataType="xs:string" />
-      <Attribute Name="CVSS" AttributeDataType="xs:string" ID="c005726e-3386-4882-948b-2f32deba68c7" />
       <Attribute Name="Attack Name" AttributeDataType="xs:string">
         <Value>V3</Value>
       </Attribute>
@@ -153,14 +145,15 @@
         <Value>1</Value>
       </Attribute>
       <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
-        <Value>0.0555</Value>
+        <Value>0.3060</Value>
       </Attribute>
-      <ExternalInterface Name="ToV3" ID="d1e0f082-13e8-4ce8-9751-5e935992261c" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <InternalLink RefPartnerSideA="d1e0f082-13e8-4ce8-9751-5e935992261c" RefPartnerSideB="147e1fd0-8ff9-4c2f-92ed-d427722a81a3" Name="InternalLink" />
+      <ExternalInterface Name="ToV3" ID="859f5926-248e-43b7-88b5-184f7d4ed9c7" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <InternalLink RefPartnerSideA="859f5926-248e-43b7-88b5-184f7d4ed9c7" RefPartnerSideB="d1e0f082-13e8-4ce8-9751-5e935992261c" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Priv Esc" ID="V4" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+
+    <InternalElement Name="(V4) Masquerading (driver)" ID="V4" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
       <Attribute Name="CVE" AttributeDataType="xs:string" />
-      <Attribute Name="CVSS" AttributeDataType="xs:string" ID="eb8d9b5c-3ff5-4a8d-9d22-7cffb8b9ad15" />
+      <Attribute Name="CVSS" AttributeDataType="xs:string" ID="c005726e-3386-4882-948b-2f32deba68c7" />
       <Attribute Name="Attack Name" AttributeDataType="xs:string">
         <Value>V4</Value>
       </Attribute>
@@ -171,14 +164,15 @@
         <Value>1</Value>
       </Attribute>
       <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
-        <Value>0.2232</Value>
+        <Value>0.0555</Value>
       </Attribute>
-      <ExternalInterface Name="ToV4" ID="147e1fd0-8ff9-4c2f-92ed-d427722a81a3" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <InternalLink RefPartnerSideA="147e1fd0-8ff9-4c2f-92ed-d427722a81a3" RefPartnerSideB="ff1f16c6-2baa-42eb-b719-da9e1c5b2ee8" Name="InternalLink" />
+      <ExternalInterface Name="ToV4" ID="d1e0f082-13e8-4ce8-9751-5e935992261c" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <InternalLink RefPartnerSideA="d1e0f082-13e8-4ce8-9751-5e935992261c" RefPartnerSideB="147e1fd0-8ff9-4c2f-92ed-d427722a81a3" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Install KillDisc malware" ID="V5" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+
+    <InternalElement Name="(V5) Priv Esc" ID="V5" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
       <Attribute Name="CVE" AttributeDataType="xs:string" />
-      <Attribute Name="CVSS" AttributeDataType="xs:string" ID="14fa7a55-7101-408a-bda8-e8fff1f9f617" />
+      <Attribute Name="CVSS" AttributeDataType="xs:string" ID="eb8d9b5c-3ff5-4a8d-9d22-7cffb8b9ad15" />
       <Attribute Name="Attack Name" AttributeDataType="xs:string">
         <Value>V5</Value>
       </Attribute>
@@ -189,14 +183,15 @@
         <Value>1</Value>
       </Attribute>
       <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
-        <Value>0.3060</Value>
+        <Value>0.2232</Value>
       </Attribute>
-      <ExternalInterface Name="ToV5" ID="ff1f16c6-2baa-42eb-b719-da9e1c5b2ee8" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <InternalLink RefPartnerSideA="ff1f16c6-2baa-42eb-b719-da9e1c5b2ee8" RefPartnerSideB="fe413177-afd9-4a14-bb53-e6dbf577fece" Name="InternalLink" />
+      <ExternalInterface Name="ToV5" ID="147e1fd0-8ff9-4c2f-92ed-d427722a81a3" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <InternalLink RefPartnerSideA="147e1fd0-8ff9-4c2f-92ed-d427722a81a3" RefPartnerSideB="ff1f16c6-2baa-42eb-b719-da9e1c5b2ee8" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Install RAT" ID="V6" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+
+    <InternalElement Name="(V6) Install KillDisc malware" ID="V6" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
       <Attribute Name="CVE" AttributeDataType="xs:string" />
-      <Attribute Name="CVSS" AttributeDataType="xs:string" ID="776744a4-5015-4b86-bbe9-750d0fce781f" />
+      <Attribute Name="CVSS" AttributeDataType="xs:string" ID="14fa7a55-7101-408a-bda8-e8fff1f9f617" />
       <Attribute Name="Attack Name" AttributeDataType="xs:string">
         <Value>V6</Value>
       </Attribute>
@@ -209,14 +204,13 @@
       <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
         <Value>0.3060</Value>
       </Attribute>
-      <ExternalInterface Name="ToV6" ID="fe413177-afd9-4a14-bb53-e6dbf577fece" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <InternalLink RefPartnerSideA="fe413177-afd9-4a14-bb53-e6dbf577fece" RefPartnerSideB="6e89716a-bc8d-40c3-bf26-331b3e8afe40" Name="InternalLink" />
+      <ExternalInterface Name="ToV6" ID="ff1f16c6-2baa-42eb-b719-da9e1c5b2ee8" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <InternalLink RefPartnerSideA="ff1f16c6-2baa-42eb-b719-da9e1c5b2ee8" RefPartnerSideB="fe413177-afd9-4a14-bb53-e6dbf577fece" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="SSH Backdoor Persistence" ID="V7" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+
+    <InternalElement Name="(V7) Install RAT" ID="V7" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
       <Attribute Name="CVE" AttributeDataType="xs:string" />
-      <Attribute Name="CVSS" AttributeDataType="xs:string" ID="d5fe4b51-7633-4dcf-b155-733577014e77">
-        <Value>CVSS:3.1/AV:L/AC:H/PR:H/UI:N/S:U/C:H/I:H/A:H</Value>
-      </Attribute>
+      <Attribute Name="CVSS" AttributeDataType="xs:string" ID="776744a4-5015-4b86-bbe9-750d0fce781f" />
       <Attribute Name="Attack Name" AttributeDataType="xs:string">
         <Value>V7</Value>
       </Attribute>
@@ -229,16 +223,38 @@
       <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
         <Value>0.3060</Value>
       </Attribute>
-      <ExternalInterface Name="ToV7" ID="6e89716a-bc8d-40c3-bf26-331b3e8afe40" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <ExternalInterface Name="ToV7" ID="fe413177-afd9-4a14-bb53-e6dbf577fece" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <InternalLink RefPartnerSideA="fe413177-afd9-4a14-bb53-e6dbf577fece" RefPartnerSideB="6e89716a-bc8d-40c3-bf26-331b3e8afe40" Name="InternalLink" />
+    </InternalElement>
+
+    <InternalElement Name="(V8) SSH Backdoor Persistence" ID="V8" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+      <Attribute Name="CVE" AttributeDataType="xs:string" />
+      <Attribute Name="CVSS" AttributeDataType="xs:string" ID="d5fe4b51-7633-4dcf-b155-733577014e77">
+        <Value>CVSS:3.1/AV:L/AC:H/PR:H/UI:N/S:U/C:H/I:H/A:H</Value>
+      </Attribute>
+      <Attribute Name="Attack Name" AttributeDataType="xs:string">
+        <Value>V8</Value>
+      </Attribute>
+      <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
+        <Value>0.9148</Value>
+      </Attribute>
+      <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+        <Value>1</Value>
+      </Attribute>
+      <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
+        <Value>0.3060</Value>
+      </Attribute>
+      <ExternalInterface Name="ToV8" ID="6e89716a-bc8d-40c3-bf26-331b3e8afe40" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
       <InternalLink RefPartnerSideA="6e89716a-bc8d-40c3-bf26-331b3e8afe40" RefPartnerSideB="4c532fb3-c73b-4a55-bb9f-64628c815348" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Lateral Movement (Recon)" ID="V8" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+
+    <InternalElement Name="(V9) Lateral Movement (Recon)" ID="V9" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
       <Attribute Name="CVE" AttributeDataType="xs:string" />
       <Attribute Name="CVSS" AttributeDataType="xs:string" ID="7351854d-9cb5-4466-aafd-f45252a50f8f">
         <Value>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</Value>
       </Attribute>
       <Attribute Name="Attack Name" AttributeDataType="xs:string">
-        <Value>V8</Value>
+        <Value>V9</Value>
       </Attribute>
       <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
         <Value>0.2200</Value>
@@ -249,16 +265,17 @@
       <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
         <Value>0.4729</Value>
       </Attribute>
-      <ExternalInterface Name="ToV8" ID="4c532fb3-c73b-4a55-bb9f-64628c815348" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <ExternalInterface Name="ToV9" ID="4c532fb3-c73b-4a55-bb9f-64628c815348" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
       <InternalLink RefPartnerSideA="4c532fb3-c73b-4a55-bb9f-64628c815348" RefPartnerSideB="563c778e-246c-40ea-8372-451569102a1f" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Exfiltrate info to C2 Server" ID="V9" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+    
+    <InternalElement Name="(V10) Exfiltrate info to C2 Server" ID="V10" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
       <Attribute Name="CVE" AttributeDataType="xs:string" />
       <Attribute Name="CVSS" AttributeDataType="xs:string" ID="0a5831ee-9a91-4b61-94f6-abf33b969e2d">
         <Value>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N</Value>
       </Attribute>
       <Attribute Name="Attack Name" AttributeDataType="xs:string">
-        <Value>V9</Value>
+        <Value>V10</Value>
       </Attribute>
       <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
         <Value>0.5600</Value>
@@ -269,16 +286,17 @@
       <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
         <Value>0.3449</Value>
       </Attribute>
-      <ExternalInterface Name="ToV9" ID="563c778e-246c-40ea-8372-451569102a1f" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <ExternalInterface Name="ToV10" ID="563c778e-246c-40ea-8372-451569102a1f" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
       <InternalLink RefPartnerSideA="563c778e-246c-40ea-8372-451569102a1f" RefPartnerSideB="933ca543-ac77-4916-a4fb-80e4287e6eff" Name="InternalLink" />
     </InternalElement>
-    <InternalElement Name="Access VPN" ID="V10" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
+    
+    <InternalElement Name="(V11) Access VPN" ID="V11" RefBaseSystemUnitPath="VulnerabilityforSystem/Vulnerability">
       <Attribute Name="CVE" AttributeDataType="xs:string" />
       <Attribute Name="CVSS" AttributeDataType="xs:string" ID="a8fe3802-72fe-43c8-9a59-d7ae1baeec67">
         <Value>CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H</Value>
       </Attribute>
       <Attribute Name="Attack Name" AttributeDataType="xs:string">
-        <Value>V10</Value>
+        <Value>V11</Value>
       </Attribute>
       <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
         <Value>0.9148</Value>
@@ -289,7 +307,7 @@
       <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
         <Value>0.1502</Value>
       </Attribute>
-      <ExternalInterface Name="ToV10" ID="933ca543-ac77-4916-a4fb-80e4287e6eff" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
+      <ExternalInterface Name="ToV11" ID="933ca543-ac77-4916-a4fb-80e4287e6eff" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
       <InternalLink RefPartnerSideA="933ca543-ac77-4916-a4fb-80e4287e6eff" RefPartnerSideB="6e05a84b-54d8-4d39-a98d-819ac4c0a435" Name="InternalLink" />
     </InternalElement>
   </InstanceHierarchy>

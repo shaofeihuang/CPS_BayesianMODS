@@ -11,15 +11,19 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-          <Value>1.48254E-05</Value>
+          <Value>0.01</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string" />
       </Attribute>          
       <ExternalInterface Name="IO" ID="b6fecd68-6843-4fe6-825e-79a9c71cfee9" RefBaseClassPath="ConnectionBetnAssets/User based" />
       <ExternalInterface Name="ToVulnerability" ID="1471031b-c125-4174-9b1c-a6e26de47aa8" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <InternalLink RefPartnerSideA="1471031b-c125-4174-9b1c-a6e26de47aa8" RefPartnerSideB="911514f8-0f3b-4196-85f0-95efbd8fce81" Name="Link" />
-      <InternalLink RefPartnerSideA="1471031b-c125-4174-9b1c-a6e26de47aa8" RefPartnerSideB="07c071d3-c63b-422e-9e6d-122713068187" Name="Link1" />
-      <InternalLink RefPartnerSideA="1471031b-c125-4174-9b1c-a6e26de47aa8" RefPartnerSideB="9127963f-a666-4252-baa5-a8287b4ce75c" Name="Link2" />
+      <InternalLink RefPartnerSideA="1471031b-c125-4174-9b1c-a6e26de47aa8" RefPartnerSideB="911514f8-0f3b-4196-85f0-95efbd8fce81" Name="VLink" />
+      <InternalLink RefPartnerSideA="1471031b-c125-4174-9b1c-a6e26de47aa8" RefPartnerSideB="07c071d3-c63b-422e-9e6d-122713068187" Name="VLink1" />
+      <InternalLink RefPartnerSideA="1471031b-c125-4174-9b1c-a6e26de47aa8" RefPartnerSideB="9127963f-a666-4252-baa5-a8287b4ce75c" Name="VLink2" />
+      <ExternalInterface Name="ToHazard" ID="b4968b6f-235d-46c8-9d05-f8b80df61eea" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="b4968b6f-235d-46c8-9d05-f8b80df61eea" RefPartnerSideB="5cea00b2-17c7-4c88-a6a5-68dbce257bf5" Name="HLink" />
+      <InternalLink RefPartnerSideA="b4968b6f-235d-46c8-9d05-f8b80df61eea" RefPartnerSideB="2cfaa84f-2283-4ba1-b854-67062f08337f" Name="HLink1" />
+      <InternalLink RefPartnerSideA="b4968b6f-235d-46c8-9d05-f8b80df61eea" RefPartnerSideB="93a8ff2b-3729-49c5-9f8b-f67b4c6831df" Name="HLink2" />
     </InternalElement>
 
     <InternalElement Name="WiNet Web" ID="WiNet_Web" RefBaseSystemUnitPath="AssetOfICS/Software/Application">
@@ -29,13 +33,15 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-          <Value>1.48254E-05</Value>
+          <Value>0.01</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string" />
       </Attribute>
       <ExternalInterface Name="IO" ID="9901a662-edd9-4eac-8f00-97be82bb83cf" RefBaseClassPath="ConnectionBetnAssets/User based" />
       <ExternalInterface Name="ToVulnerability" ID="9c223d01-24b4-4dc5-b5fb-766f6d45c1ab" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <InternalLink RefPartnerSideA="9c223d01-24b4-4dc5-b5fb-766f6d45c1ab" RefPartnerSideB="fc2b3b23-5dec-4004-8f2e-14f7b12355ec" Name="Link" />
+      <InternalLink RefPartnerSideA="9c223d01-24b4-4dc5-b5fb-766f6d45c1ab" RefPartnerSideB="fc2b3b23-5dec-4004-8f2e-14f7b12355ec" Name="VLink" />
+      <ExternalInterface Name="ToHazard" ID="967f4b19-bc60-495a-9833-eb1c9fa2fba5" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="967f4b19-bc60-495a-9833-eb1c9fa2fba5" RefPartnerSideB="5cea00b2-17c7-4c88-a6a5-68dbce257bf5" Name="HLink" />
     </InternalElement>
 
     <InternalElement Name="iSolarCloud MQTT Broker" ID="MQTT_Broker" RefBaseSystemUnitPath="AssetOfICS/Software/Application">
@@ -45,16 +51,20 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-          <Value>1.48254E-05</Value>
+          <Value>0.01</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string" /> 
       </Attribute>
       <ExternalInterface Name="ToVulnerability" ID="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <InternalLink RefPartnerSideA="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefPartnerSideB="9b82a3e4-723a-47b1-ae10-6fc02cdfd911" Name="Link" />
-      <InternalLink RefPartnerSideA="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefPartnerSideB="cc102c11-c2f8-4b95-9701-2c975f5ea63b" Name="Link1" />
-      <InternalLink RefPartnerSideA="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefPartnerSideB="3d056ff8-488c-4bdf-9321-633e1c1f5ea6" Name="Link2" />
-      <InternalLink RefPartnerSideA="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefPartnerSideB="f0d40c84-34eb-489a-b7aa-04bab1ff24c0" Name="Link3" />
-      <InternalLink RefPartnerSideA="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefPartnerSideB="adfd6ccf-c3c7-4929-b69c-1d5232b48617" Name="Link4" />
+      <InternalLink RefPartnerSideA="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefPartnerSideB="9b82a3e4-723a-47b1-ae10-6fc02cdfd911" Name="VLink" />
+      <InternalLink RefPartnerSideA="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefPartnerSideB="cc102c11-c2f8-4b95-9701-2c975f5ea63b" Name="VLink1" />
+      <InternalLink RefPartnerSideA="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefPartnerSideB="3d056ff8-488c-4bdf-9321-633e1c1f5ea6" Name="VLink2" />
+      <InternalLink RefPartnerSideA="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefPartnerSideB="f0d40c84-34eb-489a-b7aa-04bab1ff24c0" Name="VLink3" />
+      <InternalLink RefPartnerSideA="bbba14d7-f291-4974-b4c0-53a29bd7f33d" RefPartnerSideB="adfd6ccf-c3c7-4929-b69c-1d5232b48617" Name="VLink4" />
+      <ExternalInterface Name="ToHazard" ID="2ea0d12b-5f6f-4111-8f24-f9a2aa7e3b32" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="2ea0d12b-5f6f-4111-8f24-f9a2aa7e3b32" RefPartnerSideB="5cea00b2-17c7-4c88-a6a5-68dbce257bf5" Name="HLink" />
+      <InternalLink RefPartnerSideA="2ea0d12b-5f6f-4111-8f24-f9a2aa7e3b32" RefPartnerSideB="2cfaa84f-2283-4ba1-b854-67062f08337f" Name="HLink1" />
+      <InternalLink RefPartnerSideA="2ea0d12b-5f6f-4111-8f24-f9a2aa7e3b32" RefPartnerSideB="93a8ff2b-3729-49c5-9f8b-f67b4c6831df" Name="HLink2" />
     </InternalElement>
 
     <InternalElement Name="WiNet-S Comms Dongle" ID="Comms_Dongle" RefBaseSystemUnitPath="AssetOfICS/Hardware/Machine">
@@ -64,7 +74,7 @@
         <Attribute Name="Product" AttributeDataType="xs:string" />
         <Attribute Name="Version" AttributeDataType="xs:string" />
         <Attribute Name="FailureRatePerHour" AttributeDataType="xs:float">
-          <Value>1.48254E-05</Value>
+          <Value>0.0000148254</Value>
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string" />
       </Attribute>
@@ -72,7 +82,10 @@
         <ExternalInterface Name="ToV15" ID="de62cb76-82fd-4202-8ea5-099b830a819c" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
       </ExternalInterface>
       <ExternalInterface Name="IO" ID="4e6d78bb-e979-4313-9af1-f24d51aaa59f" RefBaseClassPath="ConnectionBetnAssets/Logic based" />
-      <InternalLink RefPartnerSideA="4e6d78bb-e979-4313-9af1-f24d51aaa59f" RefPartnerSideB="86c10f25-197c-4be8-a622-8dd1870a276c" Name="Link" />
+      <InternalLink RefPartnerSideA="4e6d78bb-e979-4313-9af1-f24d51aaa59f" RefPartnerSideB="86c10f25-197c-4be8-a622-8dd1870a276c" Name="LLink" />
+      <ExternalInterface Name="ToHazard" ID="d1801042-79e9-4051-883f-ad20f98ab96f" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="4e6d78bb-e979-4313-9af1-f24d51aaa59f" RefPartnerSideB="86c10f25-197c-4be8-a622-8dd1870a276c" Name="HLink" />
+      <InternalLink RefPartnerSideA="d1801042-79e9-4051-883f-ad20f98ab96f" RefPartnerSideB="93a8ff2b-3729-49c5-9f8b-f67b4c6831df" Name="HLink1" />
     </InternalElement>
 
     <InternalElement Name="Solar PV Inverter" ID="Solar_PV_Inverter" RefBaseSystemUnitPath="AssetOfICS/Hardware/Machine">
@@ -87,11 +100,14 @@
         <Attribute Name="Date of first use" AttributeDataType="xs:string" />
       </Attribute>
       <ExternalInterface Name="ToVulnerability" ID="de0c78d2-a59d-4936-ad15-b880b4ceae4f" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <ExternalInterface Name="ToHazard" ID="6d2d016c-d1f8-4093-93b5-1e5703d8d486" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
       <ExternalInterface Name="IO" ID="86c10f25-197c-4be8-a622-8dd1870a276c" RefBaseClassPath="ConnectionBetnAssets/Logic based" />
-      <InternalLink RefPartnerSideA="86c10f25-197c-4be8-a622-8dd1870a276c" RefPartnerSideB="819b9d06-b4f6-4ca0-b94c-3a98b0b1ff6b" Name="Link" />
-      <InternalLink RefPartnerSideA="de0c78d2-a59d-4936-ad15-b880b4ceae4f" RefPartnerSideB="099916f1-a2df-4241-a6b1-5912fe33cb85" Name="Link1" />
-      <InternalLink RefPartnerSideA="6d2d016c-d1f8-4093-93b5-1e5703d8d486" RefPartnerSideB="4ee29329-32de-46a6-ba7f-c80207d2767a" Name="Link2" />
+      <InternalLink RefPartnerSideA="86c10f25-197c-4be8-a622-8dd1870a276c" RefPartnerSideB="819b9d06-b4f6-4ca0-b94c-3a98b0b1ff6b" Name="LLink" />
+      <InternalLink RefPartnerSideA="de0c78d2-a59d-4936-ad15-b880b4ceae4f" RefPartnerSideB="099916f1-a2df-4241-a6b1-5912fe33cb85" Name="LLink1" />
+      <InternalLink RefPartnerSideA="6d2d016c-d1f8-4093-93b5-1e5703d8d486" RefPartnerSideB="4ee29329-32de-46a6-ba7f-c80207d2767a" Name="LLink2" />
+      <ExternalInterface Name="ToHazard" ID="6d2d016c-d1f8-4093-93b5-1e5703d8d486" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="86c10f25-197c-4be8-a622-8dd1870a276c" RefPartnerSideB="819b9d06-b4f6-4ca0-b94c-3a98b0b1ff6b" Name="HLink" />
+      <InternalLink RefPartnerSideA="6d2d016c-d1f8-4093-93b5-1e5703d8d486" RefPartnerSideB="2cd7055d-a75d-4a97-bee6-65ebae7cecda" Name="HLink1" />
+      <InternalLink RefPartnerSideA="6d2d016c-d1f8-4093-93b5-1e5703d8d486" RefPartnerSideB="4ee29329-32de-46a6-ba7f-c80207d2767a" Name="HLink2" />
     </InternalElement>
 
     <InternalElement Name="Power Grid" ID="Power_Grid" RefBaseSystemUnitPath="AssetOfICS/Hardware/Machine">
@@ -105,11 +121,14 @@
         </Attribute>
         <Attribute Name="Date of first use" AttributeDataType="xs:string" />
       </Attribute>
-      <ExternalInterface Name="ToHazard" ID="1d008df3-1533-491a-bfb0-e05f61a16c53" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
-      <ExternalInterface Name="IO" ID="819b9d06-b4f6-4ca0-b94c-3a98b0b1ff6b" RefBaseClassPath="ConnectionBetnAssets/Logic based" />
       <ExternalInterface Name="ToVulnerability" ID="cb07ea86-fba4-43e0-8b9b-7fbf852b4d5c" RefBaseClassPath="ConnectionBetnAssets/VulnerabilityRef" />
-      <InternalLink RefPartnerSideA="1d008df3-1533-491a-bfb0-e05f61a16c53" RefPartnerSideB="4ee29329-32de-46a6-ba7f-c80207d2767a" Name="Link" />
-      <InternalLink RefPartnerSideA="1d008df3-1533-491a-bfb0-e05f61a16c53" RefPartnerSideB="8b0902ce-e7ab-421e-ab75-770df99554cd" Name="Link1" />
+      <ExternalInterface Name="IO" ID="819b9d06-b4f6-4ca0-b94c-3a98b0b1ff6b" RefBaseClassPath="ConnectionBetnAssets/Logic based" />
+      <InternalLink RefPartnerSideA="1d008df3-1533-491a-bfb0-e05f61a16c53" RefPartnerSideB="4ee29329-32de-46a6-ba7f-c80207d2767a" Name="LLink" />
+      <InternalLink RefPartnerSideA="1d008df3-1533-491a-bfb0-e05f61a16c53" RefPartnerSideB="8b0902ce-e7ab-421e-ab75-770df99554cd" Name="LLink1" />
+      <ExternalInterface Name="ToHazard" ID="1d008df3-1533-491a-bfb0-e05f61a16c53" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="1d008df3-1533-491a-bfb0-e05f61a16c53" RefPartnerSideB="4ee29329-32de-46a6-ba7f-c80207d2767a" Name="HLink" />
+      <InternalLink RefPartnerSideA="1d008df3-1533-491a-bfb0-e05f61a16c53" RefPartnerSideB="8b0902ce-e7ab-421e-ab75-770df99554cd" Name="HLink1" />
+      <InternalLink RefPartnerSideA="1d008df3-1533-491a-bfb0-e05f61a16c53" RefPartnerSideB="7100c7b6-9ea7-4e5b-9a64-3ace67d59b1e" Name="HLink2" />
     </InternalElement>
 
     <InternalElement Name="Attacker" ID="Attacker" RefBaseSystemUnitPath="AssetOfICS/User">
@@ -117,8 +136,8 @@
         <Value>100</Value>
       </Attribute>
       <ExternalInterface Name="IO" ID="36119a16-4bfe-4bf8-ad15-99391e9eaf38" RefBaseClassPath="ConnectionBetnAssets/User based" />
-      <InternalLink RefPartnerSideA="36119a16-4bfe-4bf8-ad15-99391e9eaf38" RefPartnerSideB="b6fecd68-6843-4fe6-825e-79a9c71cfee9" Name="Link" />
-      <InternalLink RefPartnerSideA="36119a16-4bfe-4bf8-ad15-99391e9eaf38" RefPartnerSideB="9901a662-edd9-4eac-8f00-97be82bb83cf" Name="Link1" />
+      <InternalLink RefPartnerSideA="36119a16-4bfe-4bf8-ad15-99391e9eaf38" RefPartnerSideB="b6fecd68-6843-4fe6-825e-79a9c71cfee9" Name="LLink" />
+      <InternalLink RefPartnerSideA="36119a16-4bfe-4bf8-ad15-99391e9eaf38" RefPartnerSideB="9901a662-edd9-4eac-8f00-97be82bb83cf" Name="LLink1" />
     </InternalElement>
   </InstanceHierarchy>
 
@@ -134,7 +153,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.6568</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.2702</Value>
         </Attribute>
@@ -153,7 +174,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.8064</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.2702</Value>
         </Attribute>
@@ -172,7 +195,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.9148</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -191,7 +216,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.3916</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -210,7 +237,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.3916</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.2516</Value>
         </Attribute>
@@ -229,7 +258,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.8064</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -252,7 +283,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.8064</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -275,7 +308,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.8064</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -298,7 +333,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.8064</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -321,7 +358,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.8064</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -344,7 +383,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.9148</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -363,7 +404,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.9148</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -382,7 +425,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.9148</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.2702</Value>
         </Attribute>
@@ -401,7 +446,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.9148</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -420,7 +467,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.56</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -437,7 +486,9 @@
         <Attribute Name="Probability of Impact" AttributeDataType="xs:string">
           <Value>0.9148</Value>
         </Attribute>
-        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string" />
+        <Attribute Name="Probability of Mitigation" AttributeDataType="xs:string">
+          <Value>1</Value>
+        </Attribute>
         <Attribute Name="Probability of Exposure" AttributeDataType="xs:string">
           <Value>0.4729</Value>
         </Attribute>
@@ -449,11 +500,37 @@
 
   <InstanceHierarchy Name="Hazards" ID="a8f06f3b-9aa4-4e84-96d9-fc8f22cf4109">
     <Version>1.0.0</Version>
-    <InternalElement Name="(H1) Emergency Equipment Failure" ID="H1" RefBaseSystemUnitPath="HazardforSystem/Hazard">
-      <ExternalInterface Name="ToH1" ID="4ee29329-32de-46a6-ba7f-c80207d2767a" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+    <InternalElement Name="(H1) Data Leakage" ID="H1_Data_Leakage" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <ExternalInterface Name="ToH1" ID="5cea00b2-17c7-4c88-a6a5-68dbce257bf5" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="5cea00b2-17c7-4c88-a6a5-68dbce257bf5" RefPartnerSideB="93a8ff2b-3729-49c5-9f8b-f67b4c6831df" Name="Link" />
     </InternalElement>
-    <InternalElement Name="(H2) Grid Instability" ID="H2" RefBaseSystemUnitPath="HazardforSystem/Hazard">
-      <ExternalInterface Name="ToH2" ID="8b0902ce-e7ab-421e-ab75-770df99554cd" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+    <InternalElement Name="(H2) Hijack Other Devices" ID="H2_Hijack_Other_Devices" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <ExternalInterface Name="ToH2" ID="2cfaa84f-2283-4ba1-b854-67062f08337f" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="2cfaa84f-2283-4ba1-b854-67062f08337f" RefPartnerSideB="93a8ff2b-3729-49c5-9f8b-f67b4c6831df" Name="Link" />
+    </InternalElement>
+    <InternalElement Name="(H3) Cyber-Physical Ransomware" ID="H3_Cyber_Physical_Ransomware" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <ExternalInterface Name="ToH3" ID="93a8ff2b-3729-49c5-9f8b-f67b4c6831df" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="93a8ff2b-3729-49c5-9f8b-f67b4c6831df" RefPartnerSideB="2cd7055d-a75d-4a97-bee6-65ebae7cecda" Name="Link" />
+      <InternalLink RefPartnerSideA="93a8ff2b-3729-49c5-9f8b-f67b4c6831df" RefPartnerSideB="4ee29329-32de-46a6-ba7f-c80207d2767a" Name="Link1" />
+    </InternalElement>
+    <InternalElement Name="(H4) Alter Energy Production" ID="H4_Alter_Energy_Production" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <ExternalInterface Name="ToH4" ID="2cd7055d-a75d-4a97-bee6-65ebae7cecda" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="2cd7055d-a75d-4a97-bee6-65ebae7cecda" RefPartnerSideB="7100c7b6-9ea7-4e5b-9a64-3ace67d59b1e" Name="Link" />
+    </InternalElement>
+    <InternalElement Name="(H5) Load Shedding" ID="H5_Load_Shedding" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <ExternalInterface Name="ToH5" ID="7100c7b6-9ea7-4e5b-9a64-3ace67d59b1e" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="7100c7b6-9ea7-4e5b-9a64-3ace67d59b1e" RefPartnerSideB="dd68545e-5878-4bae-ad26-90aba73e4ff2" Name="Link" />
+    </InternalElement>
+    <InternalElement Name="(H6) Emergency Equipment Failure" ID="H6_Emergency_Equipment_Failure" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <ExternalInterface Name="ToH6" ID="4ee29329-32de-46a6-ba7f-c80207d2767a" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="4ee29329-32de-46a6-ba7f-c80207d2767a" RefPartnerSideB="dd68545e-5878-4bae-ad26-90aba73e4ff2" Name="Link" />
+    </InternalElement>
+    <InternalElement Name="(H7) Grid Instability" ID="H7_Grid_Instability" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <ExternalInterface Name="ToH7" ID="8b0902ce-e7ab-421e-ab75-770df99554cd" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
+      <InternalLink RefPartnerSideA="8b0902ce-e7ab-421e-ab75-770df99554cd" RefPartnerSideB="dd68545e-5878-4bae-ad26-90aba73e4ff2" Name="Link" />
+    </InternalElement>
+    <InternalElement Name="(H8) Power Outage" ID="H8_Power_Outage" RefBaseSystemUnitPath="HazardforSystem/Hazard">
+      <ExternalInterface Name="ToH8" ID="dd68545e-5878-4bae-ad26-90aba73e4ff2" RefBaseClassPath="ConnectionBetnAssets/HazardRef" />
     </InternalElement>
   </InstanceHierarchy>
 
