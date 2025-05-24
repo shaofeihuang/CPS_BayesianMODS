@@ -654,40 +654,6 @@ if __name__ == "__main__":
     except nx.NodeNotFound as e:
         print(f"[!] Error: {e}")
 
-    # Compute risk score
-    risk_measurements = []
-    for node in total_elements:
-        prob_node = inference_occurrence.query(variables=[node])
-        impact_node = inference_impact.query(variables=[node])
-        for element in path_length_final_node:
-            if node == element[0]:
-                cpd_prob = prob_node.values
-                cpd_imp = element[3]
-                cpd_impact = impact_node.values        
-                risk_v1=cpd_prob[0] * cpd_imp       # Risk computed as probability of occurrence multiplied by 1/path_length (from node to end)
-                risk_v2=cpd_prob[0] * cpd_impact[0] # Risk computed as probability of occurrence multiplied by probability of impact
-                #print(node, "P_Occurrence:", cpd_prob[0], "P_Path:", cpd_imp, "P_Impact:", cpd_impact[0], "Risk V1:", risk_v1, "Risk V2:", risk_v2)
-                risk_measurements.append([node, cpd_prob[0], cpd_imp, cpd_impact[0], risk_v1, risk_v2])
-
-    # Sort nodes according to posterior prob of occurrence
-    node_prob_dict = {}
-    for node in total_elements:
-        if node == last_node:
-            pass
-        else:
-            prob_if_node_fail = inference_occurrence.query(variables=[last_node], evidence={node:0})
-            #print (node, "\n", prob_if_node_fail)
-            prob_if_node_fail_values = prob_if_node_fail.values
-            min_value = min(prob_if_node_fail_values)
-            max_value = max(prob_if_node_fail_values)
-            min_value = round(min_value, 2) - 0.01  # Restrict minimum value to 2 decimal places
-            max_value = round(max_value, 2) + 0.01  # Restrict maximum value to 2 decimal places and add 0.01
-            normal_prob_if_node_fail = (prob_if_node_fail_values[0] - min_value) / (max_value - min_value)
-            node_prob_dict[node] = normal_prob_if_node_fail
-    #print (node_prob_dict)
-    sorted_node_prob = sorted(node_prob_dict.items(), key=lambda x: x[1], reverse=True)
-
-    # Print results to console
     for nodes in total_elements:
         if nodes == last_node:
             prob_failure = inference_occurrence.query(variables=[nodes], evidence={source_node:1})
