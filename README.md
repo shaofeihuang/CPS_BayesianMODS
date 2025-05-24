@@ -14,14 +14,17 @@ This code demonstrates how this risk assessment approach can be applied to a rea
 ## 3. AML_BBN_BlackEnergy.py
 This code demonstrates how this risk assessment approach can be applied to a real-world example - the BlackEnergy attack. The code analyses the BlackEnergy.aml file to generate BBNs and compute a risk score.
 
-## 4. Generic_CPS.aml
+## 4. AML_BBN_SolarPV.py
+This code demonstrates how this risk assessment approach can be applied to a Solar PV inverter attack scenario, based on ForeScout's SUN:DOWN research. (https://www.forescout.com/research-labs/sun-down-a-dark-side-to-solar-energy-grids/) The code analyses the SolarPV.aml file to generate BBNs and compute a risk score.
+
+## 5. Generic_CPS.aml
 This is a markup file depicting a generic CPS based on the Automation Markup Language (AutomationML), edited using the AutomationML Editor. More information can be found here: https://www.automationml.org/
 
-## 5. Stuxnet.aml
+## 6. Stuxnet.aml
 This is a markup file depicting the Stuxnet attack scenario based on the Automation Markup Language (AutomationML), edited using the AutomationML Editor.
 
-## 6. BlackEnergy.aml
+## 7. BlackEnergy.aml
 This is a markup file depicting the BlackEnergy attack scenario based on the Automation Markup Language (AutomationML), edited using the AutomationML Editor.
 
-## 7. Generic_CPS_BNN.xdsl
+## 8. Generic_CPS_BNN.xdsl
 This is a representation of a generic CPS, edited using GeNIe Academic 5.0.
