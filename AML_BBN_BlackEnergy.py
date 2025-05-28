@@ -18,7 +18,7 @@ import random
 from datetime import datetime
 from collections import defaultdict
 from openpyxl.styles import PatternFill
-from pgmpy.models import BayesianNetwork
+from pgmpy.models import DiscreteBayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
 from pgmpy.inference import VariableElimination
 
@@ -487,7 +487,7 @@ if __name__ == "__main__":
     path_length_betn_nodes_final= []
     path_length_final_node = []
 
-    bbn_occurrence = BayesianNetwork()
+    bbn_occurrence = DiscreteBayesianNetwork()
     connections = connections_mapped
     bbnNodes=bbn_occurrence.add_nodes_from(total_elements)
     bbn_occurrence.add_edges_from([(connection['from'], connection['to']) for connection in connections])
@@ -550,7 +550,7 @@ if __name__ == "__main__":
 ######################################################################
 # Section 5: Bayesian Belief Network (BBN) Implementation for Impact #
 ######################################################################
-bbn_impact = BayesianNetwork()
+bbn_impact = DiscreteBayesianNetwork()
 bbn_impact.add_edges_from([(connection['from'], connection['to']) for connection in connections])
 cpds = {}
 cpd_values_list_impact = []
