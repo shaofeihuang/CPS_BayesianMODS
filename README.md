@@ -2,7 +2,7 @@
 
 This project repository provides resources and source code for performing Bayesian and multi-objective decision support for real-time cyber-physical incident mitigation. The BN structures capture probabilistic dependencies among CPS components, vulnerabilities, and hazards—enabling integrated assessment across cybersecurity, reliability, and safety dimensions.
 
-The use of Automation ML, based on the CAEX (Computer Aided Engineering Exchange) schema, supports machine-readable and hierarchical representations of CPS assets and interdependencies. This facilitates model consistency, domain knowledge integration, and dynamic risk analysis.
+The use of AutomationML, based on the CAEX (Computer Aided Engineering Exchange) schema, supports machine-readable and hierarchical representations of CPS assets and interdependencies. This facilitates model consistency, domain knowledge integration, and dynamic risk analysis.
 
 ---
 
