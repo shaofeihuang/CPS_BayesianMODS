@@ -1,15 +1,15 @@
-# Cyber-Physical System (CPS) Risk Assessment using Bayesian Networks (BN) and AutomationML
+# Bayesian and Multi-Objective Decision Support for Real-Time Cyber-Physical Incident Mitigation
 
-This repository provides resources and code for performing risk assessments of Cyber-Physical Systems (CPS) using Bayesian Networks (BNs) derived from Automation Mark-up Language (AutomationML) models. The BN structures capture probabilistic dependencies among CPS components, vulnerabilities, and hazards—enabling integrated assessment across cybersecurity, reliability, and safety dimensions.
+This project repository provides resources and source code for performing Bayesian and multi-objective decision support for real-time cyber-physical incident mitigation. The BN structures capture probabilistic dependencies among CPS components, vulnerabilities, and hazards—enabling integrated assessment across cybersecurity, reliability, and safety dimensions.
 
-The use of AutomationML, based on the CAEX (Computer Aided Engineering Exchange) schema, supports machine-readable and hierarchical representations of CPS assets and interdependencies. This facilitates model consistency, domain knowledge integration, and dynamic risk analysis.
-
-This methodology builds upon the findings of Bhosale et al. (2024), available at:  
-[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10623880](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10623880)
+The use of Automation ML, based on the CAEX (Computer Aided Engineering Exchange) schema, supports machine-readable and hierarchical representations of CPS assets and interdependencies. This facilitates model consistency, domain knowledge integration, and dynamic risk analysis.
 
 ---
 
 ## 📂 Repository Contents
+
+### `AML_BN_CPS.py`  
+Performs BN-based CPS risk assessment on a generic AML model. Computes probabilities of failure and system-level impact. Tested on Python 3.12.8.
 
 ### `AML_BN_CPS.py`  
 Performs BN-based CPS risk assessment on a generic AML model. Computes probabilities of failure and system-level impact. Tested on Python 3.12.8.
