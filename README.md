@@ -1,4 +1,4 @@
-# Bayesian and Multi-Objective Decision Support for Real-Time Cyber-Physical Incident Mitigation
+# Project Repository: Bayesian and Multi-Objective Decision Support for Real-Time Cyber-Physical Incident Mitigation
 
 This project repository provides resources and source code for performing Bayesian and multi-objective decision support for real-time cyber-physical incident mitigation. The BN structures capture probabilistic dependencies among CPS components, vulnerabilities, and hazards—enabling integrated assessment across cybersecurity, reliability, and safety dimensions.
 
@@ -8,10 +8,10 @@ The use of Automation ML, based on the CAEX (Computer Aided Engineering Exchange
 
 ## 📂 Repository Contents
 
-### `AML_BN_CPS.py`  
-Performs BN-based CPS risk assessment on a generic AML model. Computes probabilities of failure and system-level impact. Tested on Python 3.12.8.
+### `Reference Data Sheet.pdf`
+Includes data and formulae used in the project.
 
-### `AML_BN_CPS.py`  
+### `AML_BN_CPS.py`
 Performs BN-based CPS risk assessment on a generic AML model. Computes probabilities of failure and system-level impact. Tested on Python 3.12.8.
 
 ### `AML_BN_Stuxnet.py`  
