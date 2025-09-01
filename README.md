@@ -12,7 +12,7 @@ The use of AutomationML, based on the CAEX (Computer Aided Engineering Exchange)
 Includes data and formulae used in the project.
 
 ### `AML_BN_CPS.py`
-Performs BN-based CPS risk assessment on a generic AML model. Computes probabilities of failure and system-level impact. Tested on Python 3.12.8.
+Performs BN-based CPS risk assessment on a generic AutomationML model. Computes probabilities of failure and system-level impact. Tested on Python 3.12.8.
 
 ### `AML_BN_Stuxnet.py`  
 Applies the risk modelling framework to the Stuxnet cyber attack scenario. Parses `Stuxnet.aml` and generates BN outputs.
@@ -28,11 +28,11 @@ Demonstrates the methodology in a Solar PV attack context. Based on ForeScout’
 Analyses a railway Communication-Based Train Control (CBTC) attack scenario. Uses `RailwayCBTC.aml` to derive risk scores.
 
 ### `utils.py`  
-Contains shared utility functions for AML file parsing and probability computation.
+Contains shared utility functions for AutomationML file parsing and probability computation.
 
 ---
 
-## 📁 AML Models
+## 📁 AutomationML Models
 
 - `Generic_CPS.aml`: Canonical CPS configuration authored in AutomationML.
 - `Stuxnet.aml`: Encodes assets and attack vectors observed in the Stuxnet case.
