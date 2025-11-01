@@ -27,6 +27,9 @@ Demonstrates the methodology in a Solar PV attack context. Based on ForeScout’
 ### `AML_BN_CBTC.py`  
 Analyses a railway Communication-Based Train Control (CBTC) attack scenario. Uses `RailwayCBTC.aml` to derive risk scores.
 
+### `Optuna_Concurrent_SolarPV_3D.py`
+Proof-of-concept decision-support tool using multi-objective optimisation (via the Optuna library https://optuna.org)
+
 ### `utils.py`  
 Contains shared utility functions for AutomationML file parsing and probability computation.
 
