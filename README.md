@@ -39,23 +39,23 @@ This repository provides a Bayesian multi-objective decision support framework f
 ### Requirements
 
 - Python 3.12+ (tested on Python 3.12.8)
-- Required libraries: `pgmpy`, `lxml`, `optuna` (for optimization scripts)
+- Required libraries: `pgmpy`, `optuna` (for optimization scripts)
 
 Install dependencies:
 ```bash
-pip install pgmpy lxml optuna
+pip install pgmpy optuna
 ```
 
 ### Example Run
 
 To execute a risk assessment on the Stuxnet scenario:
 ```bash
-python AML_BN_Stuxnet.py
+python AML_BN_Stuxnet.py -i Stuxnet.aml
 ```
 
 For multi-objective decision optimization:
 ```bash
-python Optuna_Concurrent_SolarPV_3D.py
+python Optuna_Concurrent_SolarPV_3D.py - i SolarPV.aml
 ```
 
 Refer to the [Optuna documentation](https://optuna.org) for advanced optimization configurations.
