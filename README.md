@@ -34,7 +34,7 @@ This repository accompanies the paper: ["Bayesian and Multi-Objective Decision S
 
 - **`Reference Data Sheet.pdf`** — Data and formulae used in the project for risk assessment and probability calculations.
 - **`Figures/`** — High-resolution versions of figures from the paper.
-- 
+
 ---
 
 ## Usage
