@@ -22,17 +22,14 @@ This repository accompanies the paper: ["Bayesian and Multi-Objective Decision S
 
 - **`AML_BN_CBTC.py`** — Analyzes a railway Communication-Based Train Control (CBTC) attack scenario using `RailwayCBTC.aml` to derive risk scores.
 
-- **`Optuna_Concurrent_SolarPV_3D.py`** — Proof-of-concept multi-objective optimization tool for decision support using the [Optuna library](https://optuna.org).
+- - **`Optuna_Concurrent_3D.py`** — Multi-objective optimization tool for decision support using the [Optuna library](https://optuna.org).
 
 - **`utils.py`** — Contains shared utility functions for AutomationML file parsing and probability computation.
-
-### AutomationML Models
-
-- **`Stuxnet.aml`**, **`BlackEnergy.aml`**, **`SolarPV.aml`**, **`RailwayCBTC.aml`** — Domain-specific AutomationML models representing CPS architectures and attack scenarios.
 
 ### Reference Materials
 
 - **`Reference Data Sheet.pdf`** — Data and formulae used in the project for risk assessment and probability calculations.
+- **`Examples/`** - AutomationML models representing CPS architectures and attack scenarios. GeNIE (xdsl) sample.
 - **`Figures/`** — High-resolution versions of figures from the paper.
 
 ---
@@ -51,17 +48,15 @@ pip install pgmpy optuna
 
 ### Example Run
 
-To execute a risk assessment on the Stuxnet scenario:
+To execute a risk assessment on the generic CPS model:
 ```bash
-python AML_BN_Stuxnet.py -i Stuxnet.aml
+python AML_BBN_CPS.py -i GenericCPS.aml
 ```
 
 For multi-objective decision optimization:
 ```bash
-python Optuna_Concurrent_SolarPV_3D.py - i SolarPV.aml
+python Optuna_Concurrent_3D.py -i SolarPV.aml
 ```
-
-Refer to the [Optuna documentation](https://optuna.org) for advanced optimization configurations.
 
 ---
 
