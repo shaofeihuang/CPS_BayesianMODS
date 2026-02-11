@@ -16,8 +16,6 @@ This repository accompanies the paper: ["Bayesian and Multi-Objective Decision S
 
 - **`Optuna_Concurrent_3D.py`** — Multi-objective optimization tool for decision support using the [Optuna library](https://optuna.org).
 
-- **`utils.py`** — Contains shared utility functions for AutomationML file parsing and probability computation.
-
 ### Reference Materials
 
 - **`Reference Data Sheet.pdf`** — Data and formulae used in the project for risk assessment and probability calculations.
