@@ -22,7 +22,7 @@ This repository accompanies the paper: ["Bayesian and Multi-Objective Decision S
 
 - **`AML_BN_CBTC.py`** — Analyzes a railway Communication-Based Train Control (CBTC) attack scenario using `RailwayCBTC.aml` to derive risk scores.
 
-- - **`Optuna_Concurrent_3D.py`** — Multi-objective optimization tool for decision support using the [Optuna library](https://optuna.org).
+- **`Optuna_Concurrent_3D.py`** — Multi-objective optimization tool for decision support using the [Optuna library](https://optuna.org).
 
 - **`utils.py`** — Contains shared utility functions for AutomationML file parsing and probability computation.
 
