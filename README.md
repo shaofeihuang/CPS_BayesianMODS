@@ -12,15 +12,7 @@ This repository accompanies the paper: ["Bayesian and Multi-Objective Decision S
 
 ### Main Scripts
 
-- **`AML_BN_CPS.py`** — Performs BN-based CPS risk assessment on a generic AutomationML model, computing probabilities of failure and system-level impact.
-
-- **`AML_BN_Stuxnet.py`** — Applies the risk modeling framework to the Stuxnet cyber attack scenario, parsing `Stuxnet.aml` and generating BN-based risk outputs.
-
-- **`AML_BN_BlackEnergy.py`** — Implements BN-based analysis for the BlackEnergy malware attack scenario using the corresponding AutomationML file.
-
-- **`AML_BN_SolarPV.py`** — Demonstrates the methodology in a Solar PV attack context, based on ForeScout's SUN:DOWN research (https://www.forescout.com/research-labs/sun-down-a-dark-side-to-solar-energy-grids/).
-
-- **`AML_BN_CBTC.py`** — Analyzes a railway Communication-Based Train Control (CBTC) attack scenario using `RailwayCBTC.aml` to derive risk scores.
+- **`AML_Bayesian.py`** — Performs BN-based CPS risk assessment on an AutomationML model, computing probabilities of failure and system-level impact.
 
 - **`Optuna_Concurrent_3D.py`** — Multi-objective optimization tool for decision support using the [Optuna library](https://optuna.org).
 
@@ -50,7 +42,7 @@ pip install pgmpy optuna
 
 To execute a risk assessment on the generic CPS model:
 ```bash
-python AML_BBN_CPS.py -i GenericCPS.aml
+python AML_Bayseian.py -i GenericCPS.aml
 ```
 
 For multi-objective decision optimization:
