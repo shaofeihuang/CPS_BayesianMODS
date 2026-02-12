@@ -12,15 +12,15 @@ This repository accompanies the paper: ["Bayesian and Multi-Objective Decision S
 
 ### Main Scripts
 
-- **`AML_Bayesian.py`** — Performs BN-based CPS risk assessment on an AutomationML model, computing probabilities of failure and system-level impact.
+- **`aml_bayesian_inference.py`** — Performs BN-based CPS risk assessment on an AutomationML model, computing probabilities of failure and system-level impact.
 
-- **`Optuna_Concurrent_3D.py`** — Multi-objective optimization tool for decision support using the [Optuna library](https://optuna.org).
+- **`optuna_3d_optimization.py`** — Multi-objective optimization tool for decision support using the [Optuna library](https://optuna.org).
 
 ### Reference Materials
 
-- **`Reference Data Sheet.pdf`** — Data and formulae used in the project for risk assessment and probability calculations.
-- **`Examples/`** - AutomationML models representing CPS architectures and attack scenarios. GeNIE (xdsl) sample.
-- **`Figures/`** — High-resolution versions of figures from the paper.
+- **`reference-data-sheet.pdf`** — Data and formulae used in the project for risk assessment and probability calculations.
+- **`examples/`** - AutomationML models representing CPS architectures and attack scenarios. GeNIE (xdsl) sample.
+- **`figures/`** — High-resolution versions of figures from the paper.
 
 ---
 
@@ -40,12 +40,12 @@ pip install pgmpy optuna
 
 To execute a risk assessment on the generic CPS model:
 ```bash
-python AML_Bayseian.py -i GenericCPS.aml
+python aml_bayesian_inference.py -i examples/generic_cps.aml
 ```
 
 For multi-objective decision optimization:
 ```bash
-python Optuna_Concurrent_3D.py -i SolarPV.aml
+python Ooptuna_3d_optimization -i examples/stuxnet.aml
 ```
 
 ---
