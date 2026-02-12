@@ -45,7 +45,7 @@ python aml_bayesian_inference.py -i examples/generic_cps.aml
 
 For multi-objective decision optimization:
 ```bash
-python Ooptuna_3d_optimization -i examples/stuxnet.aml
+python optuna_3d_optimization -i examples/stuxnet.aml
 ```
 
 ---
